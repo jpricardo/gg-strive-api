@@ -2,6 +2,8 @@ import { FormEventHandler, useContext } from 'react';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
 import { AuthContext } from '../../../store/auth-context';
 
+import styles from './index.module.css';
+
 const Login = () => {
 	const { login } = useContext(AuthContext);
 	const handleSubmit: FormEventHandler = (e) => {
@@ -10,7 +12,7 @@ const Login = () => {
 	};
 
 	return (
-		<Card className='px-3 py-2'>
+		<Card className={styles.card + ' px-3 py-2'}>
 			<Card.Body as='section' className='px-4 py-2'>
 				<Row as='article'>
 					<header className='text-center pt-3'>
