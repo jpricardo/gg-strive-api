@@ -1,12 +1,16 @@
 import express from 'express';
-import charactersRouter from './routes/characters.js';
 import middleware from './lib/middleware.js';
+import routers from './routers/index.js';
 
 const app = express();
+
 app.use(express.json());
+
+app.use(middleware.staticFilesHandler);
+
 app.use(middleware.timelog);
 
-app.use('/characters', charactersRouter);
+app.use('/', routers);
 
 app.get('/about', (req, res) => {
 	res.send('Hello! The app is running...');

@@ -9,5 +9,6 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true
-  }
+  }, 
+  "exclude": ["./src/client"]
 }
