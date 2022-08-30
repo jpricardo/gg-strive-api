@@ -6,9 +6,8 @@ const app = express();
 
 app.use(express.json());
 
-app.use(middleware.staticFilesHandler);
-
 app.use(middleware.timelog);
+app.use(middleware.staticFilesHandler);
 
 app.use('/', routers);
 

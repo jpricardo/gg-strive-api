@@ -4,14 +4,24 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+
+import { ApiContextProvider } from './store/api-context';
 import { AuthContextProvider } from './store/auth-context';
+import { DataContextProvider } from './store/data-context';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
 	<React.StrictMode>
-		<AuthContextProvider>
-			<App />
-		</AuthContextProvider>
+		<BrowserRouter>
+			<AuthContextProvider>
+				<ApiContextProvider>
+					<DataContextProvider>
+						<App />
+					</DataContextProvider>
+				</ApiContextProvider>
+			</AuthContextProvider>
+		</BrowserRouter>
 	</React.StrictMode>
 );
 
