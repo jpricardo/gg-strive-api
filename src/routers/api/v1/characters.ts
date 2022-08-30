@@ -1,23 +1,10 @@
 import express from 'express';
-import character from '../../../models/character.js';
+import CharacterController from '../../../controllers/character.js';
 
 const router = express.Router();
 
-router.route('/').get(async (req, res) => {
-	character.getAllCharacters().then((data) => {
-		res.status(200).send(data);
-	});
-});
+router.route('/').get(CharacterController.getAll).post(CharacterController.create);
 
-router.route('/:id').get(async (req, res) => {
-	character
-		.getCharacterById(req.params.id)
-		.then((data) => {
-			res.status(200).send(data);
-		})
-		.catch((error) => {
-			res.status(404).send({ error });
-		});
-});
+router.route('/:name').get(CharacterController.getByName).patch(CharacterController.updateByName);
 
 export default router;

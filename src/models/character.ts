@@ -1,22 +1,22 @@
-import db from '../controllers/db.js';
+import db from '../db.js';
 
-const getAllCharacters = () => {
-	return new Promise((resolve, reject) => {
-		db.query('SELECT * FROM characters', [], (error, results) => {
-			if (error) reject(error);
-			resolve(results.rows);
-		});
-	});
-};
+const characterSchema = new db.Schema(
+	{
+		name: { type: String, required: true },
+		moves: {
+			type: [
+				{
+					name: String,
+					input: String,
+					airOk: Boolean,
+					damage: Number,
+				},
+			],
+		},
+	},
+	{ collection: 'characters' }
+);
 
-const getCharacterById = (id: string) => {
-	return new Promise((resolve, reject) => {
-		db.query('SELECT * FROM characters WHERE id = $1', [id], (error, results) => {
-			if (error) reject(error);
-			if (results.rowCount === 0) reject('Resource not found!');
-			resolve(results.rows[0]);
-		});
-	});
-};
+const Character = db.model('Character', characterSchema);
 
-export default { getAllCharacters, getCharacterById };
+export default Character;
