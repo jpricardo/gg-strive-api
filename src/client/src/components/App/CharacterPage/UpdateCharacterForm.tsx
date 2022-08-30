@@ -35,6 +35,7 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 		setName(data.name ?? '');
 		setBattleType(data.battleType ?? '');
 		setDisplayName(data.displayName ?? '');
+		setEasyToUse(data.easyToUse ?? 5);
 	};
 
 	return (
