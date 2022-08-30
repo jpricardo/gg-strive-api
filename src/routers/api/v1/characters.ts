@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.route('/').get(CharacterController.getAll).post(CharacterController.create);
 
-router.route('/:name').get(CharacterController.getByName).patch(CharacterController.updateByName);
+router.route('/:name').get(CharacterController.getByName).patch(CharacterController.updateByName).delete(CharacterController.deleteByName);
 
 export default router;

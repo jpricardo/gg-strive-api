@@ -1,7 +1,7 @@
 declare interface IUser {}
 
 declare interface IMove {
-	type: string; // Strike, Throw, Movement
+	category: string; // Strike, Throw, Movement
 	input: string; // 2D, 234S, 523HS, c.S, etc.
 	guard: string; // Standing, Crounching, Both
 	airOnly: true; // Se só pode ser usado no ar

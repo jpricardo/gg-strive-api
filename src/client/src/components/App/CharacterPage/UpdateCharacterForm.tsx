@@ -1,7 +1,10 @@
 import { FormEventHandler, useContext, useEffect, useState } from 'react';
-import { Modal, Form, Button, Row, Col, FloatingLabel } from 'react-bootstrap';
+import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+
 import { ApiContext } from '../../../store/api-context';
+import { AuthContext } from '../../../store/auth-context';
 import { DataContext } from '../../../store/data-context';
+import { DeleteCharacterModal } from '../Modals';
 
 type Props = { data: ICharacter };
 const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
@@ -10,12 +13,13 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 	const [battleType, setBattleType] = useState(data.battleType ?? '');
 	const [easyToUse, setEasyToUse] = useState(data.easyToUse ?? 5);
 
-	const { updateCharacterByName } = useContext(ApiContext);
-	const { refreshData } = useContext(DataContext);
+	const [showModal, setShowModal] = useState(false);
+	const openModal = () => setShowModal(true);
+	const closeModal = () => setShowModal(false);
 
-	const battleTypeOptions = ['Balance', 'Long Range', 'High Speed', 'Power Throw', 'Unique', 'Technical', 'Shooting', 'One Shot', 'Rush', 'Power'].sort(
-		(a, b) => a.localeCompare(b)
-	);
+	const { updateCharacterByName } = useContext(ApiContext);
+	const { refreshData, battleTypeOptions } = useContext(DataContext);
+	const { isLogged } = useContext(AuthContext);
 
 	useEffect(() => {
 		resetForms();
@@ -39,46 +43,62 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 	};
 
 	return (
-		<Form onSubmit={handleSubmit}>
-			<Form.Group className='my-1'>
-				<FloatingLabel label='Name'>
-					<Form.Control size='sm' type='text' value={name} disabled />
-				</FloatingLabel>
-			</Form.Group>
-			<Form.Group className='my-1'>
-				<FloatingLabel label='Display Name'>
-					<Form.Control size='sm' type='text' value={displayName} onChange={(e) => setDisplayName(e.target.value)} required />
-				</FloatingLabel>
-			</Form.Group>
-			<Form.Group className='my-1'>
-				<FloatingLabel label='Battle Type'>
-					<Form.Select size='sm' value={battleType} onChange={(e) => setBattleType(e.target.value)} required>
-						{battleTypeOptions.map((val) => (
-							<option value={val} key={val}>
-								{val}
-							</option>
-						))}
-					</Form.Select>
-				</FloatingLabel>
-			</Form.Group>
-			<Form.Group className='my-1'>
-				<FloatingLabel label='Easy to Use'>
-					<Form.Control type='number' value={easyToUse} onChange={(e) => setEasyToUse(parseInt(e.target.value))} required />
-				</FloatingLabel>
-			</Form.Group>
-			<Row className='justify-content-between my-1'>
-				<Col lg={5} className='text-start mt-1'>
-					<Button className='w-100' onClick={resetForms} variant='secondary'>
-						Descartar
-					</Button>
-				</Col>
-				<Col lg={5} className='text-end mt-1'>
-					<Button className='w-100' type='submit'>
-						Enviar
-					</Button>
-				</Col>
-			</Row>
-		</Form>
+		<>
+			<Form onSubmit={handleSubmit}>
+				<Form.Group className='my-1'>
+					<FloatingLabel label='Name'>
+						<Form.Control size='sm' type='text' value={name} disabled />
+					</FloatingLabel>
+				</Form.Group>
+				<Form.Group className='my-1'>
+					<FloatingLabel label='Display Name'>
+						<Form.Control size='sm' type='text' value={displayName} onChange={(e) => setDisplayName(e.target.value)} required />
+					</FloatingLabel>
+				</Form.Group>
+				<Form.Group as={Row} className='my-1'>
+					<Col>
+						<FloatingLabel label='Battle Type'>
+							<Form.Select size='sm' value={battleType} onChange={(e) => setBattleType(e.target.value)} required>
+								{battleTypeOptions.map((val) => (
+									<option value={val} key={val}>
+										{val}
+									</option>
+								))}
+							</Form.Select>
+						</FloatingLabel>
+					</Col>
+					<Col>
+						<FloatingLabel label='Easy to Use'>
+							<Form.Control type='number' value={easyToUse} onChange={(e) => setEasyToUse(parseInt(e.target.value))} required />
+						</FloatingLabel>
+					</Col>
+				</Form.Group>
+				{isLogged && (
+					<>
+						<Row className='justify-content-between my-1'>
+							<Col lg={6} className='text-start mt-1'>
+								<Button className='w-100' onClick={resetForms} variant='secondary'>
+									Discard
+								</Button>
+							</Col>
+							<Col lg={6} className='text-end mt-1'>
+								<Button className='w-100' type='submit'>
+									Update
+								</Button>
+							</Col>
+						</Row>
+						<Row className='mt-3 mb-1'>
+							<Col>
+								<Button className='w-100' variant='danger' onClick={openModal}>
+									Delete
+								</Button>
+							</Col>
+						</Row>
+					</>
+				)}
+			</Form>
+			<DeleteCharacterModal data={data} show={showModal} handleClose={closeModal} />
+		</>
 	);
 };
 

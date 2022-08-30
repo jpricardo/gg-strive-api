@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, Col, Figure, Modal, Row } from 'react-bootstrap';
+import { Card, Col, Figure, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { EditCharacterModal } from '../Modals';
 
@@ -16,7 +16,7 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 	const getStars = () => {
 		const stars = [];
 		for (let i = 0; i < data.easyToUse; i++) {
-			stars.push(<span key={i}>*</span>);
+			stars.push(<span key={i}>⭐</span>);
 		}
 		return stars;
 	};
@@ -27,17 +27,19 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 				<Card.Body className='p-2'>
 					<Row>
 						<Figure>
-							<Figure.Image width={180} height={180} alt={`${data.name}'s portrait`} />
+							<Figure.Image className='w-100' alt={`${data.name}'s portrait`} src='https://icon-library.com/images/user-profile-icon/user-profile-icon-4.jpg' />
 						</Figure>
 					</Row>
 					<Row>
-						<Col>{data.displayName}</Col>
-					</Row>
-					<Row>
 						<Col>{data.easyToUse && <>{getStars()}</>}</Col>
-						<Col>{data.battleType && <>{data.battleType}</>}</Col>
+						<Col className='text-center'>{data.battleType && <>{data.battleType}</>}</Col>
 					</Row>
 				</Card.Body>
+				<Card.Footer>
+					<Row>
+						<Col>{data.displayName}</Col>
+					</Row>
+				</Card.Footer>
 			</Card>
 			<EditCharacterModal data={data} show={showModal} handleClose={closeModal} />
 		</>

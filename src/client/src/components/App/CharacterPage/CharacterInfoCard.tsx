@@ -1,6 +1,6 @@
 import { Card, Col, Row } from 'react-bootstrap';
-import UpdateCharacterForm from './UpdateCharacterForm';
 import styles from './index.module.css';
+import UpdateCharacterForm from './UpdateCharacterForm';
 
 type Props = { data: ICharacter };
 const CharacterInfoCard: React.FC<Props> = ({ data }) => {
@@ -16,7 +16,7 @@ const CharacterInfoCard: React.FC<Props> = ({ data }) => {
 					<Col className='text-center'>
 						<Card.Img
 							className={styles.portrait}
-							src='https://www.guiltygear.com/ggst/en/wordpress/wp-content/uploads/2020/09/chara_pc_mll.webp'
+							//src='https://www.guiltygear.com/ggst/en/wordpress/wp-content/uploads/2020/09/chara_pc_mll.webp'
 							alt='Imagem do boneco'
 							height={200}
 						/>

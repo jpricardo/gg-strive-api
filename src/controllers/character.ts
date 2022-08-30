@@ -3,7 +3,7 @@ import Character from '../models/character.js';
 
 class CharacterController {
 	async getAll(req: Request, res: Response) {
-		const docs = await Character.find({}).lean().exec();
+		const docs = await Character.find({});
 		res.status(200).send(docs);
 	}
 
@@ -16,13 +16,19 @@ class CharacterController {
 		}
 	}
 
+	async deleteByName(req: Request, res: Response) {
+		await Character.findOneAndDelete({ name: req.params.name });
+		res.status(200).send({ ok: 'Resource deleted' });
+	}
+
 	async getByName(req: Request, res: Response) {
 		const character = await Character.findOne({ name: req.params.name });
 		res.status(200).send(character);
 	}
 
 	async updateByName(req: Request, res: Response) {
-		const character = await Character.findOneAndUpdate({ name: req.params.name }, req.body);
+		const options = { new: true, setDefaultsOnInsert: true };
+		const character = await Character.findOneAndUpdate({ name: req.params.name }, req.body, options);
 		res.status(200).send(character);
 	}
 }

@@ -4,7 +4,7 @@ type Props = { data: ICharacter };
 const CharacterMoves: React.FC<Props> = ({ data }) => {
 	return (
 		<>
-			<Row className='pb-2 border-bottom justify-content-between' as='header'>
+			<Row className='pb-2 px-1 border-bottom justify-content-between' as='header'>
 				<Col>
 					<h3>Moves</h3>
 				</Col>

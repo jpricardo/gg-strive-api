@@ -5,9 +5,10 @@ declare interface IDefaultContext {
 	characters: ICharacter[];
 	isLoading: boolean;
 	refreshData: () => void;
+	battleTypeOptions: string[];
 }
 
-const defaultContext: IDefaultContext = { characters: [], isLoading: false, refreshData: () => undefined };
+const defaultContext: IDefaultContext = { characters: [], isLoading: false, refreshData: () => undefined, battleTypeOptions: [] };
 const DataContext = React.createContext(defaultContext);
 
 type Props = { children: React.ReactNode };
@@ -15,6 +16,10 @@ const DataContextProvider: React.FC<Props> = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [characters, setCharacters] = useState<ICharacter[]>([]);
 	const { getCharacters } = useContext(ApiContext);
+
+	const battleTypeOptions = ['Balance', 'Long Range', 'High Speed', 'Power Throw', 'Unique', 'Technical', 'Shooting', 'One Shot', 'Rush', 'Power'].sort(
+		(a, b) => a.localeCompare(b)
+	);
 
 	useEffect(() => {
 		refreshData();
@@ -30,7 +35,7 @@ const DataContextProvider: React.FC<Props> = ({ children }) => {
 			.catch(console.error);
 	};
 
-	const context = { characters, refreshData, isLoading };
+	const context = { characters, refreshData, isLoading, battleTypeOptions };
 
 	return <DataContext.Provider value={context}>{children}</DataContext.Provider>;
 };
