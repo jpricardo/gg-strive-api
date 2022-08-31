@@ -1,4 +1,4 @@
-import { FormEventHandler, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, createRef, FormEventHandler, useContext, useEffect, useState } from 'react';
 import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 
 import { ApiContext } from '../../../store/api-context';
@@ -12,6 +12,7 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 	const [displayName, setDisplayName] = useState(data.displayName ?? '');
 	const [battleType, setBattleType] = useState(data.battleType ?? '');
 	const [easyToUse, setEasyToUse] = useState(data.easyToUse ?? 5);
+	const fileInput = createRef<HTMLInputElement>();
 
 	const [showModal, setShowModal] = useState(false);
 	const openModal = () => setShowModal(true);
@@ -25,9 +26,28 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 		resetForms();
 	}, [data.name]);
 
-	const handleSubmit: FormEventHandler = (e) => {
+	const getBase64 = (file: File): Promise<string> => {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => {
+				resolve(reader.result as string);
+			};
+			reader.onerror = (error) => reject(error);
+		});
+	};
+
+	const getFileInput = async () => {
+		const files = fileInput.current?.files;
+		if (!files) return;
+		return { name: files[0].name, img: await getBase64(files[0]) };
+	};
+
+	const handleSubmit: FormEventHandler = async (e) => {
 		e.preventDefault();
-		updateCharacterByName(name, { battleType, displayName, easyToUse })
+		const portrait = await getFileInput();
+		console.log(portrait);
+		updateCharacterByName(name, { battleType, displayName, easyToUse, portrait })
 			.then((res) => {
 				console.log(res);
 				refreshData();
@@ -45,6 +65,11 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 	return (
 		<>
 			<Form onSubmit={handleSubmit}>
+				<Form.Group className='my-1'>
+					<FloatingLabel label='Portrait'>
+						<Form.Control type='file' size='sm' ref={fileInput} />
+					</FloatingLabel>
+				</Form.Group>
 				<Form.Group className='my-1'>
 					<FloatingLabel label='Name'>
 						<Form.Control size='sm' type='text' value={name} disabled />

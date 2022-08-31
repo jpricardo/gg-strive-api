@@ -27,7 +27,11 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 				<Card.Body className='p-2'>
 					<Row>
 						<Figure>
-							<Figure.Image className='w-100' alt={`${data.name}'s portrait`} src='https://icon-library.com/images/user-profile-icon/user-profile-icon-4.jpg' />
+							<Figure.Image
+								className='w-100'
+								alt={`${data.name}'s portrait`}
+								src={data.portrait?.img ?? 'https://icon-library.com/images/user-profile-icon/user-profile-icon-4.jpg'}
+							/>
 						</Figure>
 					</Row>
 					<Row>

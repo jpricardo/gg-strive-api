@@ -32,6 +32,10 @@ declare interface ICharacter {
 	_id: string;
 	name: string;
 	displayName: string;
+	portrait: {
+		name: string;
+		img: string;
+	};
 	battleType: string;
 	easyToUse: number;
 	moves: { normals: INormal[]; commandNormals: ICommandNormal[]; specials: ISpecial[]; supers: ISuper[] };

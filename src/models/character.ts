@@ -13,6 +13,11 @@ enum BatteType {
 	'Power',
 }
 
+const imageSchema = new db.Schema({
+	name: { type: String, required: true },
+	img: { type: String },
+});
+
 const normalsSchema = new db.Schema({ category: String, input: String, guard: String });
 const specialsSchema = new db.Schema({ category: String, input: String, guard: String });
 const supersSchema = new db.Schema({ category: String, input: String, guard: String });
@@ -29,6 +34,7 @@ const characterSchema = new db.Schema(
 		displayName: { type: String },
 		battleType: { type: String, enum: BatteType },
 		easyToUse: { type: Number, enum: [1, 2, 3, 4, 5] },
+		portrait: imageSchema,
 		moves: {
 			type: movesSchema,
 			required: true,

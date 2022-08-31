@@ -16,6 +16,7 @@ const CharacterInfoCard: React.FC<Props> = ({ data }) => {
 					<Col className='text-center'>
 						<Card.Img
 							className={styles.portrait}
+							src={data.portrait?.img}
 							//src='https://www.guiltygear.com/ggst/en/wordpress/wp-content/uploads/2020/09/chara_pc_mll.webp'
 							alt='Imagem do boneco'
 							height={200}
