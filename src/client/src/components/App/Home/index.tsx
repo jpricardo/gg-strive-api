@@ -21,17 +21,17 @@ const Home = () => {
 		<>
 			<Row as='section'>
 				<Col>
-					<Row as='header'>
-						<h1>Conteúdo principal</h1>
+					<Row as='header' className={styles.header}>
+						<h1>Characters</h1>
 					</Row>
 					<Row>
 						{characters.map((character) => (
-							<Col lg={3} md={4} key={character.name} className='mb-2'>
+							<Col lg={2} md={3} sm={4} xs={6} key={character.name} className='mb-2'>
 								<CharacterCard data={character} />
 							</Col>
 						))}
 						{isLogged && (
-							<Col lg={3} md={4} className='mb-2'>
+							<Col lg={2} md={3} sm={4} xs={6} className='mb-2'>
 								<AddCharacterCard onClick={openModal} />
 							</Col>
 						)}

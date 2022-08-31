@@ -5,7 +5,7 @@ import UpdateCharacterForm from './UpdateCharacterForm';
 type Props = { data: ICharacter };
 const CharacterInfoCard: React.FC<Props> = ({ data }) => {
 	return (
-		<Card className='mb-3'>
+		<Card className={styles.characterInfoCard + ' mb-3'}>
 			<Card.Header className='py-1'>
 				<Card.Title className='m-0' as='h3'>
 					{data.displayName}
@@ -19,7 +19,6 @@ const CharacterInfoCard: React.FC<Props> = ({ data }) => {
 							src={data.portrait?.img}
 							//src='https://www.guiltygear.com/ggst/en/wordpress/wp-content/uploads/2020/09/chara_pc_mll.webp'
 							alt='Imagem do boneco'
-							height={200}
 						/>
 					</Col>
 				</Row>

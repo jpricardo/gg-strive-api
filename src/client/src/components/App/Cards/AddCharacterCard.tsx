@@ -10,7 +10,7 @@ const AddCharacterCard: React.FC<Props> = ({ onClick }) => {
 
 	return (
 		<>
-			<Card className={styles.card} onClick={handleClick}>
+			<Card className={styles.card + ' shadow'} onClick={handleClick}>
 				<Card.Body className='p-2'>+ Character</Card.Body>
 			</Card>
 		</>

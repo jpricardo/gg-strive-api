@@ -18,7 +18,7 @@ const AuthContext = createContext(defaultContext);
 type Props = { children: React.ReactNode };
 const AuthContextProvider: React.FC<Props> = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(defaultContext.currentUser);
-	const [isLogged, setIsLogged] = useState(true);
+	const [isLogged, setIsLogged] = useState(false);
 
 	const login = () => {
 		axios.post('/auth/login').then(console.log).catch(console.error);

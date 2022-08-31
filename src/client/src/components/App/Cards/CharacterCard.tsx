@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Card, Col, Figure, Row } from 'react-bootstrap';
+import { Badge, Card, Col, Figure, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { BattleTypeBadge } from '../Badges';
 import { EditCharacterModal } from '../Modals';
+import StarRating from '../StarRating';
 
 import styles from './index.module.css';
 
@@ -26,17 +28,20 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 			<Card className={styles.card} onClick={handleClick}>
 				<Card.Body className='p-2'>
 					<Row>
-						<Figure>
+						<Figure className={styles.figure}>
 							<Figure.Image
-								className='w-100'
+								className={styles.portrait + ' w-100'}
 								alt={`${data.name}'s portrait`}
 								src={data.portrait?.img ?? 'https://icon-library.com/images/user-profile-icon/user-profile-icon-4.jpg'}
 							/>
+							<BattleTypeBadge className={styles.typeBadge}>{data.battleType}</BattleTypeBadge>
 						</Figure>
 					</Row>
 					<Row>
-						<Col>{data.easyToUse && <>{getStars()}</>}</Col>
-						<Col className='text-center'>{data.battleType && <>{data.battleType}</>}</Col>
+						<Col>
+							<StarRating amount={data.easyToUse} />
+							{/* {data.easyToUse && <>{getStars()}</>} */}
+						</Col>
 					</Row>
 				</Card.Body>
 				<Card.Footer>

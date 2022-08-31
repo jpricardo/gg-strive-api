@@ -1,4 +1,23 @@
+.card {
+  height: 100%;
+  background-color: rgba(255,255,255,0.05);
+  border: 2px solid black;
+  color: white
+}
+
 .card:hover {
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(100,0,0,0.2);
   cursor: pointer;
+}
+
+.portrait {
+  border: 1px solid black;
+}
+
+.typeBadge {
+  position: relative;
+  top: -20px;
+  left: 5px;
+  border-radius: 0;
+  font-size: 0.9rem;
 }

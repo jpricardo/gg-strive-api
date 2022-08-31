@@ -49,7 +49,9 @@ const CharacterPage = () => {
 				</Row>
 			</Row>
 			<Row as='section'>
-				<Col md={4}>{character && <CharacterInfoCard data={character} />}</Col>
+				<Col lg={3} md={4}>
+					{character && <CharacterInfoCard data={character} />}
+				</Col>
 				<Col>{character && <CharacterMoves data={character} />}</Col>
 			</Row>
 		</>
