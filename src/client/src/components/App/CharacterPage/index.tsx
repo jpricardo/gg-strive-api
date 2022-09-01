@@ -42,10 +42,8 @@ const CharacterPage = () => {
 		<>
 			<Row as='header' className='mb-2'>
 				<Row className='justify-content-between'>
-					<Col className='text-start'>
-						{previousCharacter && <Link to={`/admin/character/${previousCharacter?.name}`}>{previousCharacter.displayName}</Link>}
-					</Col>
-					<Col className='text-end'>{nextCharacter && <Link to={`/admin/character/${nextCharacter?.name}`}>{nextCharacter.displayName}</Link>}</Col>
+					<Col className='text-start'>{previousCharacter && <Link to={`/characters/${previousCharacter?.name}`}>{previousCharacter.displayName}</Link>}</Col>
+					<Col className='text-end'>{nextCharacter && <Link to={`/characters/${nextCharacter?.name}`}>{nextCharacter.displayName}</Link>}</Col>
 				</Row>
 			</Row>
 			<Row as='section'>
