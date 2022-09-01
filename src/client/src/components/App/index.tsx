@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -10,11 +10,10 @@ import AppNavbar from './AppNavbar';
 const AppRoutes = () => {
 	return (
 		<Routes>
-			<Route path='/admin'>
-				<Route path='' element={<Home />} />
-				<Route path='character/:name' element={<CharacterPage />} />
-				<Route path='login' element={<Login />} />
-			</Route>
+			<Route path='/' element={<Navigate to='/characters' replace={true} />} />
+			<Route path='/characters' element={<Home />} />
+			<Route path='/characters/:name' element={<CharacterPage />} />
+			<Route path='/login' element={<Login />} />
 		</Routes>
 	);
 };

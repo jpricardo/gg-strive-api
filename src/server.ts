@@ -11,10 +11,6 @@ app.use(middleware.staticFilesHandler);
 
 app.use('/', routers);
 
-app.get('/about', (req, res) => {
-	res.send('Hello! The app is running...');
-});
-
 app.use('*', (req, res) => {
 	res.status(404).send({ error: 'Resource not found!' });
 });

@@ -9,12 +9,16 @@ const AppNavbar = () => {
 	return (
 		<Navbar bg='dark' variant='dark' expand='md' fixed='top'>
 			<Container>
-				<Navbar.Brand>Strive API</Navbar.Brand>
+				<Navbar.Brand>
+					<Nav.Link as={Link} to='/'>
+						Strive API
+					</Nav.Link>
+				</Navbar.Brand>
 				<Navbar.Toggle />
 				<Navbar.Collapse className='justify-content-between'>
 					<div>
 						<Navbar.Text>
-							<Nav.Link as={Link} to='/admin'>
+							<Nav.Link as={Link} to='/characters'>
 								Characters
 							</Nav.Link>
 						</Navbar.Text>
@@ -22,7 +26,7 @@ const AppNavbar = () => {
 					<div>
 						{!isLogged && (
 							<Navbar.Text>
-								<Link to='/admin/login'>Login</Link>
+								<Link to='/login'>Login</Link>
 							</Navbar.Text>
 						)}
 					</div>

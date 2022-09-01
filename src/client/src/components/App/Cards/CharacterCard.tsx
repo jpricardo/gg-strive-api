@@ -12,7 +12,7 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 	const [showModal, setShowModal] = useState(false);
 	const navigate = useNavigate();
 
-	const handleClick = () => navigate(`character/${data.name}`);
+	const handleClick = () => navigate(`${data.name}`);
 	const closeModal = () => setShowModal(false);
 
 	const getStars = () => {
