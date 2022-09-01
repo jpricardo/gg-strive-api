@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Badge, Card, Col, Figure, Row } from 'react-bootstrap';
+import { Card, Col, Figure, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { BattleTypeBadge } from '../Badges';
 import { EditCharacterModal } from '../Modals';
@@ -26,15 +26,20 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 	return (
 		<>
 			<Card className={styles.card} onClick={handleClick}>
-				<Card.Body className='p-2'>
-					<Row>
+				<Card.Body className='p-1'>
+					<Row style={{ marginBottom: '-25px' }}>
 						<Figure className={styles.figure}>
+							<Row>
+								<Col>
+									<div className={styles.displayName}>{data.displayName}</div>
+								</Col>
+							</Row>
 							<Figure.Image
 								className={styles.portrait + ' w-100'}
 								alt={`${data.name}'s portrait`}
 								src={data.portrait?.img ?? 'https://icon-library.com/images/user-profile-icon/user-profile-icon-4.jpg'}
 							/>
-							<BattleTypeBadge className={styles.typeBadge}>{data.battleType}</BattleTypeBadge>
+							<BattleTypeBadge>{data.battleType}</BattleTypeBadge>
 						</Figure>
 					</Row>
 					<Row>
@@ -44,11 +49,6 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 						</Col>
 					</Row>
 				</Card.Body>
-				<Card.Footer>
-					<Row>
-						<Col>{data.displayName}</Col>
-					</Row>
-				</Card.Footer>
 			</Card>
 			<EditCharacterModal data={data} show={showModal} handleClose={closeModal} />
 		</>

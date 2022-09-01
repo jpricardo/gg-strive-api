@@ -26,7 +26,7 @@ const Home = () => {
 					</Row>
 					<Row>
 						{characters.map((character) => (
-							<Col lg={2} md={3} sm={4} xs={6} key={character.name} className='mb-2'>
+							<Col lg={2} md={3} sm={4} xs={6} key={character.name} className='mb-2 gx-2'>
 								<CharacterCard data={character} />
 							</Col>
 						))}
