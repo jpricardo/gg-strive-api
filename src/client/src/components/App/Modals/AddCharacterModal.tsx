@@ -19,7 +19,7 @@ const AddCharacterModal: React.FC<Props> = ({ show, handleClose }) => {
 	const handleSubmit: FormEventHandler = (e) => {
 		e.preventDefault();
 		createCharacter &&
-			createCharacter({ name, battleType, displayName, easyToUse })
+			createCharacter({ name, battleType: battleType as BattleType, displayName, easyToUse })
 				.then((res) => {
 					console.log(res);
 					resetAndClose();

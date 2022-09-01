@@ -10,7 +10,7 @@ type Props = { data: ICharacter };
 const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 	const [name, setName] = useState(data.name ?? '');
 	const [displayName, setDisplayName] = useState(data.displayName ?? '');
-	const [battleType, setBattleType] = useState(data.battleType ?? '');
+	const [battleType, setBattleType] = useState<BattleType | string>(data.battleType ?? '');
 	const [easyToUse, setEasyToUse] = useState(data.easyToUse ?? 5);
 	const fileInput = createRef<HTMLInputElement>();
 
@@ -48,7 +48,7 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 		const portrait = await getFileInput();
 		console.log(portrait);
 		updateCharacterByName &&
-			updateCharacterByName(name, { battleType, displayName, easyToUse, portrait })
+			updateCharacterByName(name, { battleType: battleType as BattleType, displayName, easyToUse, portrait })
 				.then((res) => {
 					console.log(res);
 					refreshData();

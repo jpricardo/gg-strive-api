@@ -26,6 +26,8 @@ declare interface ISpecial extends IMove {
 
 declare interface ISuper extends ISpecial {}
 
+type BattleType = 'Balance' | 'One Shot' | 'Long Range' | 'Shooting' | 'Power' | 'Rush' | 'High Speed' | 'Technical' | 'Power Throw' | 'Unique';
+
 declare interface ICharacter {
 	_id: string;
 	name: string;
@@ -34,7 +36,7 @@ declare interface ICharacter {
 		name: string;
 		img: string;
 	};
-	battleType: string;
+	battleType: BattleType;
 	easyToUse: number;
 	moves: { normals: INormal[]; commandNormals: ICommandNormal[]; specials: ISpecial[]; supers: ISuper[] };
 }

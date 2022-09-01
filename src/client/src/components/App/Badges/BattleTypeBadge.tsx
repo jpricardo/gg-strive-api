@@ -1,9 +1,11 @@
 import { Badge } from 'react-bootstrap';
 import styles from './index.module.css';
 
-type Props = { className?: string; children: React.ReactNode };
-const BattleTypeBadge: React.FC<Props> = ({ className, children }) => {
-	return <Badge className={styles.typeBadge + ' ' + className}>{children}</Badge>;
+type Props = { className?: string; variant: BattleType };
+const BattleTypeBadge: React.FC<Props> = ({ className, variant }) => {
+	const classes = [styles[variant.replaceAll(' ', '')], styles.typeBadge, className].filter((name) => name);
+	console.log(classes);
+	return <Badge className={classes.join(' ')}>{variant}</Badge>;
 };
 
 export default BattleTypeBadge;

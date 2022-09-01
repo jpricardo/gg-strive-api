@@ -3,11 +3,13 @@ import { Container, Nav, Navbar, Stack } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../store/auth-context';
 
+import styles from './index.module.css';
+
 const AppNavbar = () => {
 	const { isLogged, logout } = useContext(AuthContext);
 
 	return (
-		<Navbar bg='dark' variant='dark' expand='md' fixed='top'>
+		<Navbar bg='dark' variant='dark' expand='sm' fixed='top'>
 			<Container>
 				<Navbar.Brand>
 					<Nav.Link as={Link} to='/'>
@@ -16,32 +18,26 @@ const AppNavbar = () => {
 				</Navbar.Brand>
 				<Navbar.Toggle />
 				<Navbar.Collapse className='justify-content-between'>
-					<Stack direction='horizontal' gap={3}>
-						<Navbar.Text>
-							<Nav.Link as={Link} to='/characters'>
-								Characters
-							</Nav.Link>
-						</Navbar.Text>
-						<Navbar.Text>
-							<Nav.Link as={Link} to='/players'>
-								Players
-							</Nav.Link>
-						</Navbar.Text>
-					</Stack>
-					<div>
+					<Nav>
+						<Nav.Link as={Link} to='/characters' className={styles.navLink}>
+							<Navbar.Text>Characters</Navbar.Text>
+						</Nav.Link>
+						<Nav.Link as={Link} to='/players' className={styles.navLink}>
+							<Navbar.Text>Players</Navbar.Text>
+						</Nav.Link>
+					</Nav>
+					<Nav>
 						{!isLogged && (
-							<Navbar.Text>
-								<Nav.Link as={Link} to='/login'>
-									Login
-								</Nav.Link>
-							</Navbar.Text>
+							<Nav.Link as={Link} to='/login' className={styles.navLink}>
+								<Navbar.Text>Login</Navbar.Text>
+							</Nav.Link>
 						)}
 						{isLogged && (
-							<Navbar.Text onClick={logout}>
-								<Nav.Link>Logout</Nav.Link>
-							</Navbar.Text>
+							<Nav.Link onClick={logout} className={styles.navLink}>
+								<Navbar.Text>Logout</Navbar.Text>
+							</Nav.Link>
 						)}
-					</div>
+					</Nav>
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>

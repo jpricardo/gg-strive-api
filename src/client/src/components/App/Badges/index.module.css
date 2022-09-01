@@ -6,7 +6,7 @@
   left: 5px;
   border-radius: 0;
   font-size: 0.8rem;
-  padding: 5px 10px 3px 5px;
+  padding: 5px 5px 3px 5px;
   border-left: 5px solid black;
 }
 
@@ -14,14 +14,51 @@
   position: absolute;
   z-index: -1;
   content: "";
-  right: -10%;
+  right: -20%;
   top: 0;
   bottom: 0;
   height: 100%;
   width: 100%;
   background-color: inherit;
-  -webkit-transform: skewX(-30deg);
-  -moz-transform: skewX(-30deg);
-  -ms-transform: skewX(-30deg);
-  transform: skewX(-30deg);
+  -webkit-transform: skewX(-40deg);
+  -moz-transform: skewX(-40deg);
+  -ms-transform: skewX(-40deg);
+  transform: skewX(-40deg);
+}
+
+.Balance {
+  background-color: rgba(255,140,0,1) !important;
+}
+
+.Rush {
+  background-color: rgba(75,100,255,1) !important;
+}
+
+.Technical {
+  background-color: rgba(50,200,50,1) !important;
+}
+
+.Shooting {
+  background-color: rgba(0,150,200,1) !important;
+}
+
+.HighSpeed {
+  background-color: rgba(0,200,255,1) !important;
+}
+
+.PowerThrow {
+  background-color: rgba(255,100,75,1) !important;
+}
+
+.OneShot {
+  background-color: rgba(255,75,50,1) !important;
+}
+
+
+.Power {
+  background-color: rgba(255,50,0,1) !important;
+}
+
+.LongRange {
+  background-color: rgba(230,175,100) !important;
 }

@@ -1,0 +1,7 @@
+.navLink > * {
+  color: rgba(255,255,255,0.6);
+}
+
+.navLink > *:hover {
+  color: rgba(255,255,255,0.9);
+}

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Card, Col, Figure, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { BattleTypeBadge } from '../Badges';
-import { EditCharacterModal } from '../Modals';
 import StarRating from '../StarRating';
 
 import styles from './index.module.css';
@@ -31,7 +30,7 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 								alt={`${data.name}'s portrait`}
 								src={data.portrait?.img ?? 'https://icon-library.com/images/user-profile-icon/user-profile-icon-4.jpg'}
 							/>
-							<BattleTypeBadge>{data.battleType}</BattleTypeBadge>
+							<BattleTypeBadge variant={data.battleType as BattleType} />
 						</Figure>
 					</Row>
 					<Row>
@@ -41,7 +40,6 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 					</Row>
 				</Card.Body>
 			</Card>
-			<EditCharacterModal data={data} show={showModal} handleClose={closeModal} />
 		</>
 	);
 };
