@@ -18,22 +18,24 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 		<>
 			<Card className={styles.card} onClick={handleClick}>
 				<Card.Body className='p-1'>
-					<Row style={{ marginBottom: '-25px' }}>
-						<Figure className={styles.figure}>
-							<Row>
-								<Col>
-									<div className={styles.displayName}>{data.displayName}</div>
-								</Col>
-							</Row>
-							<Figure.Image
-								className={styles.portrait + ' w-100'}
-								alt={`${data.name}'s portrait`}
-								src={data.portrait?.img ?? 'https://icon-library.com/images/user-profile-icon/user-profile-icon-4.jpg'}
-							/>
-							<BattleTypeBadge variant={data.battleType as BattleType} />
-						</Figure>
+					<Row className='gy-0' style={{ marginBottom: '-25px' }}>
+						<Col>
+							<Figure className={styles.figure}>
+								<Row>
+									<Col>
+										<div className={styles.displayName}>{data.displayName}</div>
+									</Col>
+								</Row>
+								<Figure.Image
+									className={styles.portrait + ' w-100'}
+									alt={`${data.name}'s portrait`}
+									src={data.portrait?.img ?? 'https://icon-library.com/images/user-profile-icon/user-profile-icon-4.jpg'}
+								/>
+								<BattleTypeBadge variant={data.battleType as BattleType} />
+							</Figure>
+						</Col>
 					</Row>
-					<Row>
+					<Row className='gy-0'>
 						<Col>
 							<StarRating amount={data.easyToUse} />
 						</Col>

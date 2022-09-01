@@ -12,6 +12,8 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 	const [displayName, setDisplayName] = useState(data.displayName ?? '');
 	const [battleType, setBattleType] = useState<BattleType | string>(data.battleType ?? '');
 	const [easyToUse, setEasyToUse] = useState(data.easyToUse ?? 5);
+	const [moves, setMoves] = useState(data.moves ?? { normals: [], specials: [], supers: [] });
+
 	const fileInput = createRef<HTMLInputElement>();
 
 	const [showModal, setShowModal] = useState(false);
@@ -46,9 +48,8 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 	const handleSubmit: FormEventHandler = async (e) => {
 		e.preventDefault();
 		const portrait = await getFileInput();
-		console.log(portrait);
 		updateCharacterByName &&
-			updateCharacterByName(name, { battleType: battleType as BattleType, displayName, easyToUse, portrait })
+			updateCharacterByName(name, { battleType: battleType as BattleType, displayName, easyToUse, portrait, moves })
 				.then((res) => {
 					console.log(res);
 					refreshData();

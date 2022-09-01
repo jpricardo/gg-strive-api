@@ -10,8 +10,20 @@
   cursor: pointer;
 }
 
+.figure {
+  overflow: hidden;
+}
+
 .portrait {
   border: 1px solid black;
+}
+
+.card:hover {
+  transform: scale(1.005);
+}
+
+.card :hover .portrait {
+  transform: scale(1.005);
 }
 
 .displayName {

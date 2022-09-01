@@ -22,29 +22,35 @@ const CharacterMoves: React.FC<Props> = ({ data }) => {
 
 	return (
 		<>
-			<Row className='pb-2 px-1 border-bottom justify-content-between' as='header'>
+			<Row className='pt-1 pb-0 px-1 border-bottom justify-content-between' as='header'>
 				<Col>
-					<h3>Moves</h3>
+					<h3>Movelist</h3>
 				</Col>
 				<Col lg={3} md={4} sm={4} xs={6}>
-					<Button className='w-100' variant='primary'>
+					{/* <Button className='w-100' variant='primary'>
 						+ Move
-					</Button>
+					</Button> */}
 				</Col>
 			</Row>
-			<Row>
+			<Row className='py-2'>
 				<Col>
-					<section>
-						<h4>Normals</h4>
+					<section id='normals'>
+						<h4>
+							<a href='#normals'>Normals</a>
+						</h4>
 						<ul>
+							{normals.length === 0 && <span>No moves to show</span>}
 							{normals.map((val) => (
 								<Move data={val} />
 							))}
 						</ul>
 					</section>
-					<section>
-						<h4>Specials</h4>
+					<section id='specials'>
+						<h4>
+							<a href='#specials'>Specials</a>
+						</h4>
 						<ul>
+							{specials.length === 0 && <span>No moves to show</span>}
 							{specials.map((val) => (
 								<Move data={val} />
 							))}
@@ -53,6 +59,7 @@ const CharacterMoves: React.FC<Props> = ({ data }) => {
 					<section>
 						<h4>Supers</h4>
 						<ul>
+							{supers.length === 0 && <span>No moves to show</span>}
 							{supers.map((val) => (
 								<Move data={val} />
 							))}
