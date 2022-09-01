@@ -28,11 +28,28 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card {
+  background-color: rgba(255,255,255,0.1);
+  border: 2px solid black;
+  color: white;
+}
+
+.card input {
+  border: 1px solid rgba(255,255,255,0.25);
+  background-color: rgba(0,0,0, 0.25);
+  color: rgba(255,255,255,0.9);
+}
+
+.card input:focus, .card input:active {
+  background-color: rgba(0,0,0,0.75);
+  color: inherit;
+}
+
+a {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgba(0,150,255,0.75);
 }

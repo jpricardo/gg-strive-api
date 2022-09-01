@@ -6,6 +6,9 @@ import CharacterPage from './CharacterPage';
 import Home from './Home';
 import Login from './Login';
 import AppNavbar from './AppNavbar';
+import ComingSoon from './ComingSoon';
+
+import './index.css';
 
 const AppRoutes = () => {
 	return (
@@ -13,6 +16,7 @@ const AppRoutes = () => {
 			<Route path='/' element={<Navigate to='/characters' replace={true} />} />
 			<Route path='/characters' element={<Home />} />
 			<Route path='/characters/:name' element={<CharacterPage />} />
+			<Route path='/players' element={<ComingSoon />} />
 			<Route path='/login' element={<Login />} />
 		</Routes>
 	);
