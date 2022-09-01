@@ -1,22 +1,28 @@
-import axios from 'axios';
-import React from 'react';
+import axios, { AxiosResponse } from 'axios';
+import React, { useContext } from 'react';
+import { AuthContext } from './auth-context';
 
-const getCharacters = () => axios.get<ICharacter[]>('/api/v1/characters');
-const createCharacter = (payload: Partial<ICharacter>) => axios.post('/api/v1/characters', payload);
-const updateCharacterByName = (name: string, payload: Partial<ICharacter>) => axios.patch(`/api/v1/characters/${name}`, payload);
-const deleteCharacterByName = (name: string) => axios.delete(`/api/v1/characters/${name}`);
-
-const defaultContext = {
-	getCharacters,
-	createCharacter,
-	updateCharacterByName,
-	deleteCharacterByName,
-};
-const ApiContext = React.createContext(defaultContext);
+interface IDefaultContext {
+	getCharacters: () => Promise<AxiosResponse<ICharacter[], any>>;
+	createCharacter: (payload: Partial<ICharacter>) => Promise<AxiosResponse<any, any>>;
+	updateCharacterByName: (name: string, payload: Partial<ICharacter>) => Promise<AxiosResponse<any, any>>;
+	deleteCharacterByName: (name: string) => Promise<AxiosResponse<any, any>>;
+}
+const ApiContext = React.createContext<Partial<IDefaultContext>>({});
 
 type Props = { children: React.ReactNode };
 const ApiContextProvider: React.FC<Props> = ({ children }) => {
-	return <ApiContext.Provider value={defaultContext}>{children}</ApiContext.Provider>;
+	const { token } = useContext(AuthContext);
+
+	const getCharacters = () => axios.get<ICharacter[]>('/api/v1/characters');
+	const createCharacter = (payload: Partial<ICharacter>) => axios.post('/api/v1/characters', payload, { headers: { Authorization: token } });
+	const updateCharacterByName = (name: string, payload: Partial<ICharacter>) =>
+		axios.patch(`/api/v1/characters/${name}`, payload, { headers: { Authorization: token } });
+	const deleteCharacterByName = (name: string) => axios.delete(`/api/v1/characters/${name}`, { headers: { Authorization: token } });
+
+	const context = { getCharacters, createCharacter, updateCharacterByName, deleteCharacterByName };
+
+	return <ApiContext.Provider value={context}>{children}</ApiContext.Provider>;
 };
 
 export { ApiContext, ApiContextProvider };

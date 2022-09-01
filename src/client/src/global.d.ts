@@ -1,5 +1,3 @@
-declare interface IUser {}
-
 declare interface IMove {
 	category: string; // Strike, Throw, Movement
 	input: string; // 2D, 234S, 523HS, c.S, etc.
@@ -39,4 +37,13 @@ declare interface ICharacter {
 	battleType: string;
 	easyToUse: number;
 	moves: { normals: INormal[]; commandNormals: ICommandNormal[]; specials: ISpecial[]; supers: ISuper[] };
+}
+
+declare interface IUser {
+	id: string;
+	username: string;
+	iat: number;
+	email?: string;
+	success?: boolean;
+	error?: string;
 }

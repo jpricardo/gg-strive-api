@@ -15,14 +15,6 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 	const handleClick = () => navigate(`${data.name}`);
 	const closeModal = () => setShowModal(false);
 
-	const getStars = () => {
-		const stars = [];
-		for (let i = 0; i < data.easyToUse; i++) {
-			stars.push(<span key={i}>⭐</span>);
-		}
-		return stars;
-	};
-
 	return (
 		<>
 			<Card className={styles.card} onClick={handleClick}>
@@ -45,7 +37,6 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 					<Row>
 						<Col>
 							<StarRating amount={data.easyToUse} />
-							{/* {data.easyToUse && <>{getStars()}</>} */}
 						</Col>
 					</Row>
 				</Card.Body>

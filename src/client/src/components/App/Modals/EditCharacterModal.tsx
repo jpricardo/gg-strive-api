@@ -19,12 +19,13 @@ const EditCharacterModal: React.FC<Props> = ({ data, show, handleClose }) => {
 
 	const handleSubmit: FormEventHandler = (e) => {
 		e.preventDefault();
-		updateCharacterByName(name, { battleType, displayName, easyToUse })
-			.then((res) => {
-				console.log(res);
-				resetAndClose();
-			})
-			.catch(console.error);
+		updateCharacterByName &&
+			updateCharacterByName(name, { battleType, displayName, easyToUse })
+				.then((res) => {
+					console.log(res);
+					resetAndClose();
+				})
+				.catch(console.error);
 	};
 
 	const resetForms = () => {

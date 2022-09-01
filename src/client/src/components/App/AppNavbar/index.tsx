@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../store/auth-context';
 
 const AppNavbar = () => {
-	const { isLogged } = useContext(AuthContext);
+	const { isLogged, logout } = useContext(AuthContext);
 
 	return (
 		<Navbar bg='dark' variant='dark' expand='md' fixed='top'>
@@ -31,7 +31,14 @@ const AppNavbar = () => {
 					<div>
 						{!isLogged && (
 							<Navbar.Text>
-								<Link to='/login'>Login</Link>
+								<Nav.Link as={Link} to='/login'>
+									Login
+								</Nav.Link>
+							</Navbar.Text>
+						)}
+						{isLogged && (
+							<Navbar.Text onClick={logout}>
+								<Nav.Link>Logout</Nav.Link>
 							</Navbar.Text>
 						)}
 					</div>

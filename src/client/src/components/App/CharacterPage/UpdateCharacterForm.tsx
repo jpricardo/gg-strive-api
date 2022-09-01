@@ -1,4 +1,4 @@
-import { ChangeEvent, createRef, FormEventHandler, useContext, useEffect, useState } from 'react';
+import { createRef, FormEventHandler, useContext, useEffect, useState } from 'react';
 import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 
 import { ApiContext } from '../../../store/api-context';
@@ -39,7 +39,7 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 
 	const getFileInput = async () => {
 		const files = fileInput.current?.files;
-		if (!files) return;
+		if (!files?.length) return;
 		return { name: files[0].name, img: await getBase64(files[0]) };
 	};
 
@@ -47,12 +47,13 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 		e.preventDefault();
 		const portrait = await getFileInput();
 		console.log(portrait);
-		updateCharacterByName(name, { battleType, displayName, easyToUse, portrait })
-			.then((res) => {
-				console.log(res);
-				refreshData();
-			})
-			.catch(console.error);
+		updateCharacterByName &&
+			updateCharacterByName(name, { battleType, displayName, easyToUse, portrait })
+				.then((res) => {
+					console.log(res);
+					refreshData();
+				})
+				.catch(console.error);
 	};
 
 	const resetForms = () => {

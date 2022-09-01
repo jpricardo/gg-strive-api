@@ -1,12 +1,13 @@
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
-import { Card, Col, Row, Stack } from 'react-bootstrap';
-import { ApiContext } from '../../../store/api-context';
-import { DataContext } from '../../../store/data-context';
-import { CharacterCard, AddCharacterCard } from '../Cards';
-import styles from './index.module.css';
-import { AddCharacterModal } from '../Modals';
+import { useContext, useState } from 'react';
+
+import { Col, Row } from 'react-bootstrap';
+
 import { AuthContext } from '../../../store/auth-context';
+import { DataContext } from '../../../store/data-context';
+import { AddCharacterCard, CharacterCard } from '../Cards';
+import { AddCharacterModal } from '../Modals';
+
+import styles from './index.module.css';
 
 const Home = () => {
 	const { characters } = useContext(DataContext);

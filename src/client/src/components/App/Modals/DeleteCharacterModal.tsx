@@ -12,13 +12,14 @@ const DeleteCharacterModal: React.FC<Props> = ({ data, show, handleClose }) => {
 	const { refreshData } = useContext(DataContext);
 
 	const handleDelete = () => {
-		deleteCharacterByName(data.name)
-			.then((res) => {
-				handleClose();
-				refreshData();
-				navigate('/admin', { replace: true });
-			})
-			.catch(console.error);
+		deleteCharacterByName &&
+			deleteCharacterByName(data.name)
+				.then((res) => {
+					handleClose();
+					refreshData();
+					navigate('/admin', { replace: true });
+				})
+				.catch(console.error);
 	};
 	return (
 		<Modal show={show} onHide={handleClose}>

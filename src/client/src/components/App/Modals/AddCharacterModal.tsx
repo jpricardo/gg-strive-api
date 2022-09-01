@@ -1,5 +1,5 @@
 import { FormEventHandler, useContext, useState } from 'react';
-import { Modal, Form, Button, Row, Col } from 'react-bootstrap';
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { ApiContext } from '../../../store/api-context';
 import { DataContext } from '../../../store/data-context';
 
@@ -18,13 +18,14 @@ const AddCharacterModal: React.FC<Props> = ({ show, handleClose }) => {
 
 	const handleSubmit: FormEventHandler = (e) => {
 		e.preventDefault();
-		createCharacter({ name, battleType, displayName, easyToUse })
-			.then((res) => {
-				console.log(res);
-				resetAndClose();
-				refreshData();
-			})
-			.catch(console.error);
+		createCharacter &&
+			createCharacter({ name, battleType, displayName, easyToUse })
+				.then((res) => {
+					console.log(res);
+					resetAndClose();
+					refreshData();
+				})
+				.catch(console.error);
 	};
 
 	const resetForms = () => {

@@ -27,12 +27,13 @@ const DataContextProvider: React.FC<Props> = ({ children }) => {
 
 	const refreshData = () => {
 		setIsLoading(true);
-		getCharacters()
-			.then(({ data }) => {
-				setIsLoading(false);
-				setCharacters(data.sort((a, b) => a.name.localeCompare(b.name)));
-			})
-			.catch(console.error);
+		getCharacters &&
+			getCharacters()
+				.then(({ data }) => {
+					setIsLoading(false);
+					setCharacters(data.sort((a, b) => a.name.localeCompare(b.name)));
+				})
+				.catch(console.error);
 	};
 
 	const context = { characters, refreshData, isLoading, battleTypeOptions };

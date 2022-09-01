@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../store/auth-context';
 
 type Props = { children: React.ReactNode };
-const RequireAuth: React.FC<Props> = ({ children }) => {
+const RequireGuest: React.FC<Props> = ({ children }) => {
 	const { isLogged, isLoading } = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		!isLogged && !isLoading && navigate(-1);
-	}, [isLoading]);
+		isLogged && navigate(-1);
+	}, [isLoading, isLogged]);
 
-	return <>{isLogged && <>{children}</>}</>;
+	return <>{children}</>;
 };
 
-export default RequireAuth;
+export default RequireGuest;
