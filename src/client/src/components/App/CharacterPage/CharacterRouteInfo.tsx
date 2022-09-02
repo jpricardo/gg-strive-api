@@ -10,16 +10,19 @@ import { PageSection, PageSubsection } from '../Sections';
 import styles from './index.module.css';
 
 const prettifyObject = (obj: any) => {
-	if (typeof obj !== 'object') return 'Cringe';
 	const newObj = structuredClone(obj);
+
 	Object.entries(obj).forEach(([key, value]) => {
 		let property = value;
 		if (typeof property === 'object') {
 			if (Array.isArray(property)) {
+				console.log(property[0]);
+				if (typeof property[0] === 'object') {
+					newObj[key] = prettifyObject(property[0]);
+				}
 				newObj[key] = [typeof property[0]];
-			} else {
-				newObj[key] = prettifyObject(property);
 			}
+			newObj[key] = prettifyObject(property);
 		} else {
 			newObj[key] = typeof property;
 		}
