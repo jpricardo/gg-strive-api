@@ -1,17 +1,71 @@
-.characterInfoCard {
+/* .characterInfoCard {
   background-color: rgba(100,0,0,0.5);
   border: 2px solid black;
   color: white
+} */
+
+.card h3 {
+  font-size: 1.5rem !important;
 }
 
-.characterInfoCard :is(input, select, input:active, input:disabled) {
+.card :is(input, select, input:active, input:disabled, select:disabled) {
+  border: 1px solid rgba(255,255,255,0.5);
   background-color: rgba(0,0,0,0.5);
   color: white
 }
 
+.card :is(input:active, input:disabled, select:disabled) {
+  border: 1px solid rgba(0,0,0,0.5);
+}
+
 
 .portrait {
-  border: 1px solid black;
+  border: 1px solid rgba(255,255,255,0.25);
   width: auto;
   width: 100%;
+}
+
+.methodBadge {
+  padding: 8px;
+  margin-right: 15px;
+  border: 1px solid black;
+}
+
+.table, .table * {
+  border-collapse: collapse;
+}
+
+.table td, table th {
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.table tr:first-child th, .table tr:first-child td {
+  border-top: 0;
+}
+
+.table tr:last-child td, .table tr:last-child th {
+  border-bottom: 0;
+}
+
+.table tr td:first-child,
+.table tr th:first-child {
+  border-left: 0;
+}
+
+.table tr td:last-child,
+.table tr th:last-child {
+  border-right: 0;
+}
+
+.table td, .table th {
+  padding: 5px 10px;
+  width: 50%;
+}
+
+.editSpan {
+  cursor: pointer;
+}
+
+.editSpan:hover {
+  color: rgba(0,150,255,0.75);
 }

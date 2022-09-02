@@ -28,19 +28,23 @@
   color: #61dafb;
 }
 
-.card {
+.modal-content {
+  background-color: rgba(0,0,0,0.95);
+}
+
+.card, .modal-body {
   background-color: rgba(255,255,255,0.1);
   border: 2px solid black;
   color: white;
 }
 
-.card input {
+.card :is(input, select), .modal-body :is(input , select){
   border: 1px solid rgba(255,255,255,0.25);
   background-color: rgba(0,0,0, 0.25);
   color: rgba(255,255,255,0.9);
 }
 
-.card input:focus, .card input:active {
+.card :is(input:focus, input:active), .modal-body :is(input:active, input:focus) {
   background-color: rgba(0,0,0,0.75);
   color: inherit;
 }

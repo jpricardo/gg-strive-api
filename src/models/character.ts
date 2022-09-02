@@ -18,12 +18,34 @@ const imageSchema = new db.Schema({
 	img: { type: String },
 });
 
-const normalsSchema = new db.Schema({ category: String, input: String, guard: String });
-const specialsSchema = new db.Schema({ category: String, input: String, guard: String });
-const supersSchema = new db.Schema({ category: String, input: String, guard: String });
+const normalsSchema = new db.Schema({
+	category: String,
+	input: String,
+	guard: String,
+	name: { type: String, required: false, trim: true },
+});
+const commandNormalsSchema = new db.Schema({
+	category: String,
+	input: String,
+	guard: String,
+	name: { type: String, required: false, trim: true },
+});
+const specialsSchema = new db.Schema({
+	category: String,
+	input: String,
+	guard: String,
+	name: { type: String, required: false, trim: true },
+});
+const supersSchema = new db.Schema({
+	category: String,
+	input: String,
+	guard: String,
+	name: { type: String, required: false, trim: true },
+});
 
 const movesSchema = new db.Schema({
 	normals: { type: [normalsSchema] },
+	commandNormals: { type: [commandNormalsSchema] },
 	specials: { type: [specialsSchema] },
 	supers: { type: [supersSchema] },
 });

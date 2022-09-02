@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { DataContext } from '../../../store/data-context';
 import CharacterInfoCard from './CharacterInfoCard';
 import CharacterMoves from './CharacterMoves';
+import CharacterRouteInfo from './CharacterRouteInfo';
 import UpdateCharacterForm from './UpdateCharacterForm';
 
 const CharacterPage = () => {
@@ -40,8 +41,8 @@ const CharacterPage = () => {
 
 	return (
 		<>
-			<Row as='header' className='mb-2'>
-				<Row className='justify-content-between'>
+			<Row as='header' className='mb-1 mt-0'>
+				<Row className='justify-content-between m-0'>
 					<Col className='text-start'>{previousCharacter && <Link to={`/characters/${previousCharacter?.name}`}>{previousCharacter.displayName}</Link>}</Col>
 					<Col className='text-end'>{nextCharacter && <Link to={`/characters/${nextCharacter?.name}`}>{nextCharacter.displayName}</Link>}</Col>
 				</Row>
@@ -50,7 +51,14 @@ const CharacterPage = () => {
 				<Col lg={3} md={4}>
 					{character && <CharacterInfoCard data={character} />}
 				</Col>
-				<Col>{character && <CharacterMoves data={character} />}</Col>
+				<Col>
+					<Row>
+						<Col>{character && <CharacterRouteInfo data={character} />}</Col>
+					</Row>
+					<Row>
+						<Col>{character && <CharacterMoves data={character} />}</Col>
+					</Row>
+				</Col>
 			</Row>
 		</>
 	);
