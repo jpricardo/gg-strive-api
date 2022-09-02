@@ -16,7 +16,7 @@ const CharacterCard: React.FC<Props> = ({ data }) => {
 
 	return (
 		<>
-			<Card className={styles.card} onClick={handleClick}>
+			<Card className={styles.card + ' shadow'} onClick={handleClick}>
 				<Card.Body className='p-1'>
 					<Row className='gy-0' style={{ marginBottom: '-25px' }}>
 						<Col>

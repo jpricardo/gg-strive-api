@@ -1,5 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+
 import { Button, Col, Row } from 'react-bootstrap';
+
+import { AuthContext } from '../../../store/auth-context';
+
 import Move from './Move';
 
 type Props = { data: ICharacter };
@@ -7,6 +11,8 @@ const CharacterMoves: React.FC<Props> = ({ data }) => {
 	const [normals, setNormals] = useState<INormal[]>(data.moves?.normals ?? []);
 	const [specials, setSpecials] = useState<ISpecial[]>(data.moves?.specials ?? []);
 	const [supers, setSupers] = useState<ISuper[]>(data.moves?.supers ?? []);
+
+	const { isLogged } = useContext(AuthContext);
 
 	const addNormal = (move: INormal) => {
 		setNormals((prevValue) => [move, ...prevValue]);
@@ -26,11 +32,13 @@ const CharacterMoves: React.FC<Props> = ({ data }) => {
 				<Col>
 					<h3>Movelist</h3>
 				</Col>
-				<Col lg={3} md={4} sm={4} xs={6}>
-					{/* <Button className='w-100' variant='primary'>
-						+ Move
-					</Button> */}
-				</Col>
+				{isLogged && (
+					<Col lg={3} md={4} sm={4} xs={6}>
+						<Button className='w-100' variant='primary'>
+							+ Move
+						</Button>
+					</Col>
+				)}
 			</Row>
 			<Row className='py-2'>
 				<Col>
@@ -56,8 +64,10 @@ const CharacterMoves: React.FC<Props> = ({ data }) => {
 							))}
 						</ul>
 					</section>
-					<section>
-						<h4>Supers</h4>
+					<section id='supers'>
+						<h4>
+							<a href='#supers'>Supers</a>
+						</h4>
 						<ul>
 							{supers.length === 0 && <span>No moves to show</span>}
 							{supers.map((val) => (

@@ -18,12 +18,8 @@
   border: 1px solid black;
 }
 
-.card:hover {
-  transform: scale(1.005);
-}
-
-.card :hover .portrait {
-  transform: scale(1.005);
+.card:hover .portrait {
+  transform: scale(1.0005);
 }
 
 .displayName {
