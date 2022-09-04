@@ -10,7 +10,7 @@ const dbUri = `mongodb+srv://${username}:${password}@cluster0.leiy1eq.mongodb.ne
 
 mongoose.set('bufferCommands', false);
 
-mongoose
+await mongoose
 	.connect(dbUri)
 	.then(() => console.log('[DB] Connection established'))
 	.catch((error) => console.error(error));
