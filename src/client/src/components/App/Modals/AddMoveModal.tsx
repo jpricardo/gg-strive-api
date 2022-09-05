@@ -57,7 +57,7 @@ const AddMoveModal: React.FC<Props> = ({ show, handleClose, handleSubmit }) => {
 					</Form.Group>
 					<Form.Group className='my-2'>
 						<FloatingLabel label='Input'>
-							<Form.Control type='text' value={input} onChange={(e) => setInput(e.target.value.trim().toLocaleUpperCase())} required />
+							<Form.Control type='text' value={input} onChange={(e) => setInput(e.target.value)} required />
 						</FloatingLabel>
 					</Form.Group>
 					<Form.Group className='my-2'>
@@ -81,7 +81,7 @@ const AddMoveModal: React.FC<Props> = ({ show, handleClose, handleSubmit }) => {
 								<option value='All'>All</option>
 								<option value='Crouching'>Crouching</option>
 								<option value='Standing'>Standing</option>
-								<option value='Ublockable'>Unblockable</option>
+								<option value='Unblockable'>Unblockable</option>
 							</Form.Select>
 						</FloatingLabel>
 					</Form.Group>

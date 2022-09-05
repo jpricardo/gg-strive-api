@@ -32,7 +32,7 @@ const Home = () => {
 							</Col>
 						))}
 						{isLogged && (
-							<Col lg={2} md={3} sm={4} xs={6} className='mb-2'>
+							<Col lg={2} md={3} sm={4} xs={6} className='mb-2 gx-2'>
 								<AddCharacterCard onClick={openModal} />
 							</Col>
 						)}

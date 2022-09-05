@@ -84,16 +84,16 @@ const CharacterMoves: React.FC<Props> = ({ data }) => {
 	return (
 		<PageSection id='movelist' title='Movelist' header={isLogged && <Button onClick={openModal}>Add Move</Button>} border>
 			<PageSubsection id='normals' title='Normals'>
-				<MoveList items={moves.normals} />
+				<MoveList items={moves.normals} characterName={data.name} />
 			</PageSubsection>
 			<PageSubsection id='command-normals' title='Command Normals'>
-				<MoveList items={moves.commandNormals} />
+				<MoveList items={moves.commandNormals} characterName={data.name} />
 			</PageSubsection>
 			<PageSubsection id='specials' title='Specials'>
-				<MoveList items={moves.specials} />
+				<MoveList items={moves.specials} characterName={data.name} />
 			</PageSubsection>
 			<PageSubsection id='supers' title='Supers'>
-				<MoveList items={moves.supers} />
+				<MoveList items={moves.supers} characterName={data.name} />
 			</PageSubsection>
 			<AddMoveModal show={showModal} handleClose={closeModal} handleSubmit={addMove} />
 		</PageSection>

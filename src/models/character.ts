@@ -20,26 +20,26 @@ const imageSchema = new db.Schema({
 
 const normalsSchema = new db.Schema({
 	category: String,
-	input: String,
 	guard: String,
+	input: { type: String, required: true, trim: true },
 	name: { type: String, required: false, trim: true },
 });
 const commandNormalsSchema = new db.Schema({
 	category: String,
-	input: String,
 	guard: String,
+	input: { type: String, required: true, trim: true },
 	name: { type: String, required: false, trim: true },
 });
 const specialsSchema = new db.Schema({
 	category: String,
-	input: String,
 	guard: String,
+	input: { type: String, required: true, trim: true },
 	name: { type: String, required: false, trim: true },
 });
 const supersSchema = new db.Schema({
 	category: String,
-	input: String,
 	guard: String,
+	input: { type: String, required: true, trim: true },
 	name: { type: String, required: false, trim: true },
 });
 

@@ -1,4 +1,5 @@
 declare interface IMove {
+	_id?: string;
 	name?: string; // Ventania, Tatami Gaeshi, Grave Digger, etc.
 	category: string; // Strike, Throw, Movement
 	input: string; // 2D, 234S, 523HS, c.S, etc.
