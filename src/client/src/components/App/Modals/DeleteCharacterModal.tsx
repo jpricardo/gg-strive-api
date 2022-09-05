@@ -17,7 +17,7 @@ const DeleteCharacterModal: React.FC<Props> = ({ data, show, handleClose }) => {
 				.then((res) => {
 					handleClose();
 					refreshData();
-					navigate('/admin', { replace: true });
+					navigate('/', { replace: true });
 				})
 				.catch(console.error);
 	};
