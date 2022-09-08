@@ -7,6 +7,6 @@ router.get('/', UserController.requireAuth, UserController.getUserFromToken);
 
 router.route('/login').post(UserController.login);
 
-router.route('/signup').post(UserController.create);
+router.route('/signup').post(UserController.requireAuth, UserController.create);
 
 export default router;
