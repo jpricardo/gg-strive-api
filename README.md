@@ -74,40 +74,6 @@ REST API for Guilty Gear Strive framedata
 </tbody>
 </table>
 
-### Create Character
-
-<table>
-<thead>
-
-<tr><th colspan=2>Request</th></tr>
-
-</thead>
-<tbody>
-
-<tr>
-<th scope='row'>URL</th>
-<td>/api/v1/characters</td>
-</tr>
-
-<tr>
-<th scope='row'>Method</th>
-<td><code>POST</code></td>
-</tr>
-
-
-<tr>
-<th scope='row'>Description</th>
-<td>Creates a new character</td>
-</tr>
-
-<tr>
-<th scope='row'>URL Params</th>
-<td>-</td>
-</tr>
-
-</tbody>
-</table>
-
 ## Characters
 
 ### Get Characters
