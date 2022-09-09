@@ -20,9 +20,17 @@ const Move: React.FC<Props> = ({ data }) => {
 	const enableEdit = () => setEdit(true);
 	const disableEdit = () => setEdit(false);
 
+	const updateMovelist = () => console.log({ name, input, category, guard });
+
 	const getHeader = () => {
 		return edit ? (
-			<span className={styles.editSpan} onClick={disableEdit}>
+			<span
+				className={styles.editSpan}
+				onClick={() => {
+					updateMovelist();
+					disableEdit();
+				}}
+			>
 				Save Changes
 			</span>
 		) : (
@@ -42,24 +50,39 @@ const Move: React.FC<Props> = ({ data }) => {
 								<Row>
 									<Form.Group as={Col} sm={6} className='my-2'>
 										<FloatingLabel label='Name'>
-											<Form.Control type='text' value={name} disabled={!edit} />
+											<Form.Control type='text' value={name} onChange={(e) => setName(e.target.value)} disabled={!edit} />
 										</FloatingLabel>
 									</Form.Group>
 									<Form.Group as={Col} className='my-2'>
 										<FloatingLabel label='Input'>
-											<Form.Control type='text' value={input} disabled={!edit} />
+											<Form.Control type='text' value={input} onChange={(e) => setInput(e.target.value)} required disabled={!edit} />
 										</FloatingLabel>
 									</Form.Group>
 								</Row>
 								<Row>
 									<Form.Group as={Col} sm={6} className='my-2'>
 										<FloatingLabel label='Category'>
-											<Form.Control type='text' value={category} disabled={!edit} />
+											<Form.Select value={category} onChange={(e) => setCategory(e.target.value)} disabled={!edit}>
+												<option value=''>-</option>
+												<option value='Strike'>Strike</option>
+												<option value='Throw'>Throw</option>
+												<option value='Air Throw'>Air Throw</option>
+												<option value='Movement'>Movement</option>
+												<option value='Counter/Parry'>Counter/Parry</option>
+												<option value='Projectile'>Projectile</option>
+												<option value='Buff/Install'>Buff/Install</option>
+											</Form.Select>
 										</FloatingLabel>
 									</Form.Group>
 									<Form.Group as={Col} className='my-2'>
 										<FloatingLabel label='Guard'>
-											<Form.Control type='text' value={guard} disabled={!edit} />
+											<Form.Select value={guard} onChange={(e) => setGuard(e.target.value)} disabled={!edit}>
+												<option value=''>-</option>
+												<option value='All'>All</option>
+												<option value='Crouching'>Crouching</option>
+												<option value='Standing'>Standing</option>
+												<option value='Unblockable'>Unblockable</option>
+											</Form.Select>
 										</FloatingLabel>
 									</Form.Group>
 								</Row>
