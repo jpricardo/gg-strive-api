@@ -1,7 +1,7 @@
 import { FormEventHandler, useState } from 'react';
 import { Button, Col, FloatingLabel, Form, Modal, Row } from 'react-bootstrap';
 
-type Props = { show: boolean; handleClose: () => void; handleSubmit: (move: INormal | ISpecial | ICommandNormal | ISuper, moveType: string) => void };
+type Props = { show: boolean; handleClose: () => void; handleSubmit: (move: IMove, moveType: string) => void };
 const AddMoveModal: React.FC<Props> = ({ show, handleClose, handleSubmit }) => {
 	const [moveType, setMoveType] = useState('');
 	const [input, setInput] = useState('');
@@ -11,7 +11,7 @@ const AddMoveModal: React.FC<Props> = ({ show, handleClose, handleSubmit }) => {
 
 	const doSubmit: FormEventHandler = (e) => {
 		e.preventDefault();
-		const move = { input, guard, category, name };
+		const move = { input, guard, moveType, category, name };
 		try {
 			handleSubmit(move, moveType);
 			resetForms();
@@ -39,8 +39,8 @@ const AddMoveModal: React.FC<Props> = ({ show, handleClose, handleSubmit }) => {
 				</Row>
 				<Form onSubmit={(e) => doSubmit(e)}>
 					<Form.Group className='my-2'>
-						<FloatingLabel label='Type'>
-							<Form.Select value={moveType} onChange={(e) => setMoveType(e.target.value)}>
+						<FloatingLabel label='Category'>
+							<Form.Select value={category} onChange={(e) => setCategory(e.target.value)} required>
 								<option value=''>-</option>
 								<option>Normal</option>
 								<option>Command Normal</option>
@@ -52,7 +52,7 @@ const AddMoveModal: React.FC<Props> = ({ show, handleClose, handleSubmit }) => {
 
 					<Form.Group className='my-2'>
 						<FloatingLabel label='Name'>
-							<Form.Control type='text' value={name} onChange={(e) => setName(e.target.value)} />
+							<Form.Control type='text' value={name} onChange={(e) => setName(e.target.value)} required />
 						</FloatingLabel>
 					</Form.Group>
 					<Form.Group className='my-2'>
@@ -61,8 +61,8 @@ const AddMoveModal: React.FC<Props> = ({ show, handleClose, handleSubmit }) => {
 						</FloatingLabel>
 					</Form.Group>
 					<Form.Group className='my-2'>
-						<FloatingLabel label='Category'>
-							<Form.Select value={category} onChange={(e) => setCategory(e.target.value)}>
+						<FloatingLabel label='Type'>
+							<Form.Select value={moveType} onChange={(e) => setMoveType(e.target.value)}>
 								<option value=''>-</option>
 								<option value='Strike'>Strike</option>
 								<option value='Throw'>Throw</option>

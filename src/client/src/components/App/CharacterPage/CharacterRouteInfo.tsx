@@ -11,13 +11,15 @@ import styles from './index.module.css';
 
 const prettifyObject = (obj: any) => {
 	const newObj = structuredClone(obj);
-
 	Object.entries(obj).forEach(([key, value]) => {
 		let property = value;
+		if (property === null) {
+			return property;
+		}
 		if (typeof property === 'object') {
 			if (Array.isArray(property)) {
 				if (typeof property[0] === 'object') {
-					newObj[key] = prettifyObject(property[0]);
+					newObj[key] = [prettifyObject(property[0])];
 				} else {
 					newObj[key] = [typeof property[0]];
 				}

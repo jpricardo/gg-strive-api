@@ -23,7 +23,7 @@ const UpdateCharacterForm: React.FC<Props> = ({ data }) => {
 	const [displayName, setDisplayName] = useState(data.displayName ?? '');
 	const [battleType, setBattleType] = useState<BattleType | string>(data.battleType ?? '');
 	const [easyToUse, setEasyToUse] = useState(data.easyToUse ?? 5);
-	const [moves, setMoves] = useState(data.moves ?? { normals: [], commandNormals: [], specials: [], supers: [] });
+	const [moves, setMoves] = useState(data.moves ?? []);
 
 	const [edit, setEdit] = useState(false);
 	const allowEdit = () => setEdit(true);

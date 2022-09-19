@@ -13,34 +13,53 @@ enum BatteType {
 	'Power',
 }
 
+enum MoveCategory {
+	'Normal',
+	'Command Normal',
+	'Special',
+	'Super',
+}
+
 const imageSchema = new db.Schema({
 	name: { type: String, required: true },
 	img: { type: String },
 });
 
-const normalsSchema = new db.Schema({
-	category: String,
+const frameDataSchema = new db.Schema({
+	onHit: { type: String, required: false, trim: true, default: '' },
+	onCounterHit: { type: String, required: false, trim: true, default: '' },
+	onBlock: { type: String, required: false, trim: true, default: '' },
+});
+
+const moveSchema = new db.Schema({
+	category: { type: String, enum: MoveCategory, required: true },
+	moveType: String,
 	guard: String,
 	input: { type: String, required: true, trim: true },
 	name: { type: String, required: false, trim: true },
+	frameData: { type: frameDataSchema, required: true, default: {} },
 });
+/*
 const commandNormalsSchema = new db.Schema({
 	category: String,
 	guard: String,
 	input: { type: String, required: true, trim: true },
 	name: { type: String, required: false, trim: true },
+	frameData: { type: frameDataSchema, required: true, default: {} },
 });
 const specialsSchema = new db.Schema({
 	category: String,
 	guard: String,
 	input: { type: String, required: true, trim: true },
 	name: { type: String, required: false, trim: true },
+	frameData: { type: frameDataSchema, required: true, default: {} },
 });
 const supersSchema = new db.Schema({
 	category: String,
 	guard: String,
 	input: { type: String, required: true, trim: true },
 	name: { type: String, required: false, trim: true },
+	frameData: { type: frameDataSchema, required: true, default: {} },
 });
 
 const movesSchema = new db.Schema({
@@ -49,7 +68,7 @@ const movesSchema = new db.Schema({
 	specials: { type: [specialsSchema] },
 	supers: { type: [supersSchema] },
 });
-
+*/
 const characterSchema = new db.Schema(
 	{
 		name: { type: String, required: true },
@@ -58,9 +77,9 @@ const characterSchema = new db.Schema(
 		easyToUse: { type: Number, enum: [1, 2, 3, 4, 5] },
 		portrait: imageSchema,
 		moves: {
-			type: movesSchema,
+			type: [moveSchema],
 			required: true,
-			default: { normals: [], specials: [], supers: [] },
+			default: [],
 		},
 	},
 	{ collection: 'characters' }
