@@ -1,20 +1,15 @@
 import express from 'express';
-import middleware from './lib/middleware.js';
+import Middleware from './lib/middleware.js';
 import routers from './routers/index.js';
 
 const app = express();
 
-app.use(express.json({ limit: '25mb' }));
-
-app.use(middleware.timelog);
-app.use(middleware.staticFilesHandler);
+Middleware.registerMiddleware(app);
 
 app.use('/', routers);
 
 app.use('*', (req, res) => {
 	res.status(404).send({ error: 'Resource not found!' });
 });
-
-app.use(middleware.errorHandler);
 
 export default app;

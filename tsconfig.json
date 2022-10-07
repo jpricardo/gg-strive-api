@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "target": "esnext",
+    "module": "ESNext",
+    "target": "ESNext",
     "rootDir": "./",
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -10,5 +10,5 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true
   }, 
-  "exclude": ["./src/client"]
+  "exclude": ["./src/client", "./src/**/*.test.ts"]
 }

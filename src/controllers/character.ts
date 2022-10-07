@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Character from '../models/character.js';
+import Character from '../schemas/character.js';
 
 class CharacterController {
 	async getAll(req: Request, res: Response) {

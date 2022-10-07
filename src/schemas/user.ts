@@ -1,6 +1,9 @@
-import db from '../db.js';
+import DataBase from '../db/database.js';
 
-const userSchema = new db.Schema(
+const connector = new DataBase().getConnector();
+connector.connect();
+
+const userSchema = new connector.Schema(
 	{
 		username: {
 			type: String,
@@ -15,6 +18,6 @@ const userSchema = new db.Schema(
 	{ collection: 'users' }
 );
 
-const User = db.model('User', userSchema);
+const User = connector.model('User', userSchema);
 
 export default User;

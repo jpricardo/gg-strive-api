@@ -1,5 +1,5 @@
-import { BattleType, CharacterProps } from './interfaces/CharacterProps';
-import InvalidPropertyError from './errors/InvalidPropertyError';
+import InvalidPropertyError from './errors/invalid-property-error';
+import CharacterProps, { BattleType } from './interfaces/character-props';
 
 class Character {
 	private static MaxEasyToUse = 5;

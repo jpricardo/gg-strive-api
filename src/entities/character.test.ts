@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import Character from './character';
-import InvalidPropertyError from './errors/InvalidPropertyError';
-import { BattleType, CharacterProps } from './interfaces/CharacterProps';
+import InvalidPropertyError from './errors/invalid-property-error';
+import { BattleType, CharacterProps } from './interfaces/character-props.js';
 
 const correctName = 'john';
 const correctDisplayName = 'John Doe';
@@ -37,15 +37,10 @@ test('Create character with invalid easyToUse', () => {
 		moves: emptyMoves,
 	};
 
-	let character;
-
-	try {
+	expect(() => {
 		// @ts-ignore
-		const character = Character.create(props);
-		// expect(character).not('test').toBeInstanceOf(Character);
-	} catch (err) {
-		expect(err).toBeInstanceOf(InvalidPropertyError);
-	}
+		Character.create(props);
+	}).toThrowError(InvalidPropertyError);
 });
 
 test('Create character with invalid battleType', () => {
@@ -57,11 +52,8 @@ test('Create character with invalid battleType', () => {
 		moves: emptyMoves,
 	};
 
-	try {
+	expect(() => {
 		// @ts-ignore
-		const character = Character.create(props);
-		// expect(character).not('test').toBeInstanceOf(Character);
-	} catch (err) {
-		expect(err).toBeInstanceOf(InvalidPropertyError);
-	}
+		Character.create(props);
+	}).toThrowError(InvalidPropertyError);
 });
