@@ -12,27 +12,21 @@ const emptyArray: string[] = [];
 test('Create an instance with string as argument', () => {
 	const instance = new InvalidPropertyError(stringProperty);
 	expect(instance).toBeInstanceOf(InvalidPropertyError);
-	const firstProperty = instance.getProperties()[0];
-	expect(firstProperty).toStrictEqual(stringProperty);
+	expect(instance.getProperties()).toContain(stringProperty);
 });
 
 test('Create an instance with array of strings as argument', () => {
 	const instance = new InvalidPropertyError(arrayOfStrings);
-	const properties = instance.getProperties();
 	expect(instance).toBeInstanceOf(InvalidPropertyError);
-	expect(properties.length).toStrictEqual(arrayOfStrings.length);
+	expect(instance.getProperties()).toHaveLength(arrayOfStrings.length);
 });
 
 test('Create an instance with empty string as argument', () => {
-	expect(() => {
-		new InvalidPropertyError(emptyString);
-	}).toThrowError();
+	expect(() => new InvalidPropertyError(emptyString)).toThrowError();
 });
 
 test('Create an instance with empty array as argument', () => {
-	expect(() => {
-		new InvalidPropertyError(emptyArray);
-	}).toThrowError();
+	expect(() => new InvalidPropertyError(emptyArray)).toThrowError();
 });
 
 test('Throw an instance', () => {

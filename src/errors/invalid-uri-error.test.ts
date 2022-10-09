@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import InvalidUriError from './invalid-uri-string';
+import InvalidUriError from './invalid-uri-error';
 
 test('Create an instance', () => {
 	const instance = new InvalidUriError();
