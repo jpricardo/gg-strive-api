@@ -1,88 +1,74 @@
-import { expect, test } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, test } from 'vitest';
+import AlreadyConnectedError from '../errors/already-connected-error';
+import AlreadyDisconnectedError from '../errors/already-disconnected-error';
+import InvalidUriError from '../errors/invalid-uri-error';
+import InMemoryRepository from '../repositories/in-memory';
+import TestRepository from '../repositories/test-repository';
 import DatabaseConnector from './database-connector';
-import InvalidUriError from './errors/invalid-uri-string';
-
-import { MongoMemoryServer } from 'mongodb-memory-server';
-import { afterAll, beforeAll } from 'vitest';
-import AlreadyConnectedError from './errors/already-connected-error';
-import AlreadyDisconnectedError from './errors/already-disconnected-error';
-
-let database = await MongoMemoryServer.create();
-
-// Valid
-let validUri: string;
 
 // Invalid
 const invalidUri = 'www.localhost.com';
 const emptyString = '';
 
+interface LocalTestContext {
+	database: InMemoryRepository;
+}
+
 // Setup and cleanup
-beforeAll(async () => {
-	await setupDatabaseUri();
+beforeEach<LocalTestContext>(async (context) => {
+	context.database = await TestRepository.create();
 });
 
-afterAll(async () => {
+afterEach<LocalTestContext>(async ({ database }) => {
 	await database.stop({ doCleanup: true });
 });
 
-const setupDatabaseUri = async () => {
-	return new Promise<void>((resolve, reject) => {
-		try {
-			const uri = database.getUri();
-			validUri = uri;
-			resolve();
-		} catch (err) {
-			reject(err);
-		}
+describe('Valid URI', () => {
+	// Tests
+	it<LocalTestContext>('Creates an instance', ({ database }) => {
+		const instance = new DatabaseConnector(database.getUri());
+		expect(instance).toBeInstanceOf(DatabaseConnector);
 	});
-};
 
-// Tests
-test('Create an instance with valid URI', () => {
-	const instance = new DatabaseConnector(validUri);
-	expect(instance).toBeInstanceOf(DatabaseConnector);
+	it<LocalTestContext>('Connects and disconnects', async ({ database }) => {
+		const instance = new DatabaseConnector(database.getUri());
+		await expect(instance.connect()).resolves.not.toThrowError();
+		await expect(instance.disconnect()).resolves.not.toThrowError();
+	});
+
+	it<LocalTestContext>('Connects once and disconnects twice', async ({ database }) => {
+		const instance = new DatabaseConnector(database.getUri());
+		await expect(instance.connect()).resolves.not.toThrowError();
+		await expect(instance.disconnect()).resolves.not.toThrowError();
+		await expect(instance.disconnect()).rejects.toThrowError(AlreadyDisconnectedError);
+	});
+
+	it<LocalTestContext>('Connects twice before disconnecting', async ({ database }) => {
+		const instance = new DatabaseConnector(database.getUri());
+		await expect(instance.connect()).resolves.not.toThrowError();
+		await expect(instance.connect()).rejects.toThrowError(AlreadyConnectedError);
+		await expect(instance.disconnect()).resolves.not.toThrowError();
+	});
+
+	it<LocalTestContext>('Connects, disconnects and connects again', async ({ database }) => {
+		const instance = new DatabaseConnector(database.getUri());
+		await expect(instance.connect()).resolves.not.toThrowError();
+		await expect(instance.disconnect()).resolves.not.toThrowError();
+		await expect(instance.connect()).resolves.not.toThrowError();
+	});
+
+	it<LocalTestContext>('Disconnects without connecting', async ({ database }) => {
+		const instance = new DatabaseConnector(database.getUri());
+		await expect(instance.disconnect()).rejects.toThrowError(AlreadyDisconnectedError);
+	});
 });
 
-test('Create an instance with invalid URI', () => {
-	expect(() => {
-		new DatabaseConnector(invalidUri);
-	}).toThrowError(InvalidUriError);
-});
+describe('Invalid URI', () => {
+	it<LocalTestContext>('Creates an instance with invalid URI', ({ database }) => {
+		expect(() => new DatabaseConnector(invalidUri)).toThrowError(InvalidUriError);
+	});
 
-test('Create an instance with empty URI', () => {
-	expect(() => {
-		new DatabaseConnector(emptyString);
-	}).toThrowError(InvalidUriError);
-});
-
-test('Connect and disconnect', async () => {
-	const instance = new DatabaseConnector(validUri);
-	await expect(instance.connect()).resolves.not.toThrowError();
-	await expect(instance.disconnect()).resolves.not.toThrowError();
-});
-
-test('Connect once and disconnect twice', async () => {
-	const instance = new DatabaseConnector(validUri);
-	await expect(instance.connect()).resolves.not.toThrowError();
-	await expect(instance.disconnect()).resolves.not.toThrowError();
-	await expect(instance.disconnect()).rejects.toThrowError(AlreadyDisconnectedError);
-});
-
-test('Connect twice before disconnecting', async () => {
-	const instance = new DatabaseConnector(validUri);
-	await expect(instance.connect()).resolves.not.toThrowError();
-	await expect(instance.connect()).rejects.toThrowError(AlreadyConnectedError);
-	await expect(instance.disconnect()).resolves.not.toThrowError();
-});
-
-test('Connect, disconnect and connect again', async () => {
-	const instance = new DatabaseConnector(validUri);
-	await expect(instance.connect()).resolves.not.toThrowError();
-	await expect(instance.disconnect()).resolves.not.toThrowError();
-	await expect(instance.connect()).resolves.not.toThrowError();
-});
-
-test('Disconnect without connecting', async () => {
-	const instance = new DatabaseConnector(validUri);
-	await expect(instance.disconnect()).rejects.toThrowError(AlreadyDisconnectedError);
+	test<LocalTestContext>('Creates an instance with empty URI', ({ database }) => {
+		expect(() => new DatabaseConnector(emptyString)).toThrowError(InvalidUriError);
+	});
 });

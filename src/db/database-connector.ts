@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import AlreadyConnectedError from './errors/already-connected-error.js';
-import AlreadyDisconnectedError from './errors/already-disconnected-error.js';
-import InvalidUriError from './errors/invalid-uri-string.js';
+import AlreadyConnectedError from '../errors/already-connected-error.js';
+import AlreadyDisconnectedError from '../errors/already-disconnected-error.js';
+import InvalidUriError from '../errors/invalid-uri-error.js';
 
 export default class DatabaseConnector {
 	private validUriStringStartsWith = ['mongodb://', 'mongodb+srv://'];
@@ -49,17 +49,10 @@ export default class DatabaseConnector {
 	private setupErrorHandler() {}
 
 	async connect() {
-		return new Promise<void>(async (resolve, reject) => {
-			try {
-				this.throwIfConnected();
-				await this.connectToDatabase();
-				this.setIsConnected(true);
-				console.log('[DB] Connection established');
-				resolve();
-			} catch (err) {
-				reject(err);
-			}
-		});
+		this.throwIfConnected();
+		await this.connectToDatabase();
+		this.setIsConnected(true);
+		console.log('[DB] Connection established');
 	}
 
 	private throwIfConnected() {
@@ -71,16 +64,9 @@ export default class DatabaseConnector {
 	}
 
 	async disconnect() {
-		return new Promise<void>(async (resolve, reject) => {
-			try {
-				this.throwIfDisconnected();
-				this.closeConnection();
-				this.setIsConnected(false);
-				resolve();
-			} catch (err) {
-				reject(err);
-			}
-		});
+		this.throwIfDisconnected();
+		this.closeConnection();
+		this.setIsConnected(false);
 	}
 
 	private throwIfDisconnected() {
