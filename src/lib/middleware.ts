@@ -2,12 +2,12 @@ import express, { NextFunction, Request, Response } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import DoNotInstantiateError from './errors/do-not-instantiate-error.js';
+import DoNotInstantiateError from '../errors/do-not-instantiate-error.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class Middleware {
-	private static __filename = fileURLToPath(import.meta.url);
-	private static __dirname = path.dirname(this.__filename);
-
 	constructor() {
 		throw new DoNotInstantiateError();
 	}
@@ -33,7 +33,7 @@ class Middleware {
 	}
 
 	private static registerFileHandlers(app: express.Application) {
-		const staticFilesHandler = express.static(path.join(this.__dirname, '..', 'client', 'build'));
+		const staticFilesHandler = express.static(path.join(__dirname, '..', 'client', 'build'));
 		app.use(staticFilesHandler);
 	}
 

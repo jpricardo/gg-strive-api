@@ -1,6 +1,4 @@
-import app from './src/server.js';
-import config from './src/config.js';
+import Server from './src/server.js';
 
-app.listen(config.port, () => {
-	console.log(`[SERVER] Servidor rodando na porta ${config.port}`);
-});
+const server = new Server();
+server.run();

@@ -1,15 +1,35 @@
 import express from 'express';
+import Config from './config.js';
 import Middleware from './lib/middleware.js';
-import routers from './routers/index.js';
+import Routes from './routers/routes.js';
 
-const app = express();
+export default class Server {
+	private readonly app = express();
+	private port: number | string;
+	private httpServer: any;
 
-Middleware.registerMiddleware(app);
+	constructor(options?: { port?: number }) {
+		options?.port ? (this.port = options.port) : (this.port = Config.port);
+		this.registerMiddleware(this.app);
+		this.registerRoutes(this.app);
+	}
 
-app.use('/', routers);
+	private registerMiddleware(app: express.Application) {
+		Middleware.registerMiddleware(app);
+	}
 
-app.use('*', (req, res) => {
-	res.status(404).send({ error: 'Resource not found!' });
-});
+	private registerRoutes(app: express.Application) {
+		const routes = new Routes().setup();
+		app.use('/', routes);
+	}
 
-export default app;
+	public run() {
+		this.httpServer = this.app.listen(this.port, () => {
+			console.log(`[SERVER] Servidor rodando na porta ${this.port}`);
+		});
+	}
+
+	public stop() {
+		this.httpServer && this.httpServer.close();
+	}
+}
