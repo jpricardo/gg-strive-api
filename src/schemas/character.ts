@@ -1,9 +1,10 @@
-import DataBase from '../db/database.js';
+import MongoDatabaseConnector from '../db/mongo-database-connector.js';
+import Config from '../config.js';
 
-const connector = new DataBase().getConnector();
+export const connector = new MongoDatabaseConnector(Config.dbUri);
 connector.connect();
 
-enum BatteType {
+export enum BatteType {
 	'Balance',
 	'Long Range',
 	'High Speed',
@@ -16,7 +17,7 @@ enum BatteType {
 	'Power',
 }
 
-enum MoveCategory {
+export enum MoveCategory {
 	'Normal',
 	'Command Normal',
 	'Special',
@@ -43,7 +44,7 @@ const moveSchema = new connector.Schema({
 	frameData: { type: frameDataSchema, required: true, default: {} },
 });
 
-const characterSchema = new connector.Schema(
+export const characterSchema = new connector.Schema(
 	{
 		name: { type: String, required: true },
 		displayName: { type: String },
@@ -58,7 +59,3 @@ const characterSchema = new connector.Schema(
 	},
 	{ collection: 'characters' }
 );
-
-const Character = connector.model('Character', characterSchema);
-
-export default Character;

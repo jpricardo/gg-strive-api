@@ -1,9 +1,10 @@
-import DataBase from '../db/database.js';
+import Config from '../config.js';
+import MongoDatabaseConnector from '../db/mongo-database-connector.js';
 
-const connector = new DataBase().getConnector();
+export const connector = new MongoDatabaseConnector(Config.dbUri);
 connector.connect();
 
-const userSchema = new connector.Schema(
+export const userSchema = new connector.Schema(
 	{
 		username: {
 			type: String,
@@ -17,7 +18,3 @@ const userSchema = new connector.Schema(
 	},
 	{ collection: 'users' }
 );
-
-const User = connector.model('User', userSchema);
-
-export default User;

@@ -1,5 +1,6 @@
 import DatabaseConnector from './database-connector.js';
 import MissingCredentialsError from '../errors/missing-credentials-error.js';
+import MongoDatabaseConnector from './mongo-database-connector.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -12,7 +13,7 @@ export default class DataBase {
 
 	constructor() {
 		if (!this.username || !this.password) throw new MissingCredentialsError();
-		this.connector = new DatabaseConnector(this.uri);
+		this.connector = new MongoDatabaseConnector(this.uri);
 	}
 
 	getConnector() {

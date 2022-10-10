@@ -1,40 +1,31 @@
-import mongoose from 'mongoose';
 import AlreadyConnectedError from '../errors/already-connected-error.js';
 import AlreadyDisconnectedError from '../errors/already-disconnected-error.js';
+import DoNotInstantiateError from '../errors/do-not-instantiate-error.js';
 import InvalidUriError from '../errors/invalid-uri-error.js';
 
-export default class DatabaseConnector {
-	private validUriStringStartsWith = ['mongodb://', 'mongodb+srv://'];
-
-	private uri: string;
+export default abstract class DatabaseConnector {
 	private connected = false;
 
-	get isConnected() {
-		return this.connected;
-	}
+	abstract validUriStringStartsWith: string[];
+	abstract uri: string;
+	abstract readonly driver: any;
+	abstract readonly connection: any;
+	abstract readonly Schema: any;
+	abstract readonly model: any;
 
-	private setIsConnected(value: boolean) {
-		this.connected = value;
-	}
-
-	private readonly driver = mongoose;
-	private readonly connection = this.driver.connection;
-
-	readonly Schema = mongoose.Schema;
-	readonly model = mongoose.model;
-
-	constructor(uri: string) {
-		if (!(typeof uri === 'string') || uri.length === 0) {
-			throw new InvalidUriError();
-		} else {
-			this.uri = uri;
-			this.validateUriString();
-			this.setupDriver();
-			this.setupErrorHandler();
+	constructor() {
+		if (this.constructor === DatabaseConnector) {
+			throw new DoNotInstantiateError();
 		}
 	}
 
-	private validateUriString() {
+	setupConnector() {
+		this.validateUriString();
+		this.setupDriver();
+		this.setupErrorHandler();
+	}
+
+	validateUriString() {
 		let valid = false;
 		this.validUriStringStartsWith.forEach((value, index, arr) => {
 			if (this.uri.startsWith(value)) valid = true;
@@ -42,38 +33,29 @@ export default class DatabaseConnector {
 		});
 	}
 
-	private setupDriver() {
-		this.driver.set('bufferCommands', false);
-	}
-
-	private setupErrorHandler() {}
+	abstract setupDriver(): void;
+	abstract setupErrorHandler(): void;
+	abstract connectToDatabase(): Promise<any>;
+	abstract closeConnection(): Promise<any>;
 
 	async connect() {
 		this.throwIfConnected();
 		await this.connectToDatabase();
-		this.setIsConnected(true);
+		this.connected = true;
 		console.log('[DB] Connection established');
 	}
 
 	private throwIfConnected() {
-		if (this.isConnected) throw new AlreadyConnectedError();
-	}
-
-	private connectToDatabase() {
-		return this.driver.connect(this.uri);
+		if (this.connected) throw new AlreadyConnectedError();
 	}
 
 	async disconnect() {
 		this.throwIfDisconnected();
 		this.closeConnection();
-		this.setIsConnected(false);
+		this.connected = false;
 	}
 
 	private throwIfDisconnected() {
-		if (!this.isConnected) throw new AlreadyDisconnectedError();
-	}
-
-	private async closeConnection() {
-		await this.connection.close();
+		if (!this.connected) throw new AlreadyDisconnectedError();
 	}
 }

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import User from '../schemas/user.js';
+import User from '../models/user.js';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Config from '../config.js';

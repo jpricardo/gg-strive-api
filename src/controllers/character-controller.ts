@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import DoNotInstantiateError from '../errors/do-not-instantiate-error.js';
-import Character from '../schemas/character.js';
-
+import Character from '../models/character.js';
 export default class CharacterController {
 	static async getAll(req: Request, res: Response) {
 		const docs = await Character.find({});
