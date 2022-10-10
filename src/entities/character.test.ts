@@ -1,14 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import DoNotInstantiateError from '../errors/do-not-instantiate-error';
 import InvalidPropertyError from '../errors/invalid-property-error';
-import Character from './character';
-import { BattleType, CharacterProps } from './interfaces/character-props.js';
+import Character, { BattleType, ICharacterProps, IMove } from './character';
 
 const correctName = 'john';
 const correctDisplayName = 'John Doe';
 const correctBattleType = BattleType.Balance;
 const correctEasyToUse = 5;
-const emptyMoves: CharacterProps['moves'] = [];
+const emptyMoves: Array<IMove> = [];
 
 const invalidEasyToUse = 10;
 const invalidBattleType = 'Broken';
@@ -22,27 +21,19 @@ const validProps = {
 };
 
 describe('Valid props', () => {
-	it('Creates instance with .create(props)', () => {
-		const props = { ...validProps };
-
-		const instance = Character.create(props);
-
-		expect(instance).toBeInstanceOf(Character);
-		expect(instance.name).toEqual(correctName);
-		expect(instance.displayName).toEqual(correctDisplayName);
-	});
-
 	it('Creates instance with new keyword', () => {
 		const props = { ...validProps };
 
-		// @ts-ignore
-		expect(() => new Character(props)).toThrowError(DoNotInstantiateError);
+		const instance = new Character(props);
+		expect(instance).toBeInstanceOf(Character);
+		expect(instance.displayName).toEqual(correctDisplayName);
+		expect(instance.name).toEqual(correctName);
 	});
 
 	it('Gets JSON', () => {
 		const props = { ...validProps };
 
-		const instance = Character.create(props);
+		const instance = new Character(props);
 
 		expect(instance.toJson()).toEqual(props);
 	});
@@ -50,7 +41,7 @@ describe('Valid props', () => {
 	it('Saves', () => {
 		const props = { ...validProps };
 
-		const instance = Character.create(props);
+		const instance = new Character(props);
 
 		expect(() => instance.save()).not.toThrowError();
 	});
@@ -64,14 +55,14 @@ describe('Invalid props', () => {
 	it('Creates Character with invalid easyToUse', () => {
 		const props = { ...validProps, easyToUse: invalidEasyToUse };
 
-		expect(() => Character.create(props)).toThrowError(InvalidPropertyError);
+		expect(() => new Character(props)).toThrowError(InvalidPropertyError);
 	});
 
 	it('Creates Character with invalid battleType', () => {
 		const props = { ...validProps, battleType: invalidBattleType };
 
 		// @ts-ignore
-		expect(() => Character.create(props)).toThrowError(InvalidPropertyError);
+		expect(() => new Character(props)).toThrowError(InvalidPropertyError);
 	});
 
 	it.todo('Creates Character with invalid moves');

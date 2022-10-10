@@ -43,27 +43,27 @@ describe('Valid URI', () => {
 		await expect(instance.disconnect()).rejects.toThrowError(AlreadyDisconnectedError);
 	});
 
-	it.skip<LocalTestContext>('Connects twice before disconnecting', async ({ database }) => {
+	it<LocalTestContext>('Connects twice before disconnecting', async ({ database }) => {
 		const instance = new MongoDatabaseConnector(database.getUri());
 		await expect(instance.connect()).resolves.not.toThrowError();
 		await expect(instance.connect()).rejects.toThrowError(AlreadyConnectedError);
 		await expect(instance.disconnect()).resolves.not.toThrowError();
 	});
 
-	it.skip<LocalTestContext>('Connects, disconnects and connects again', async ({ database }) => {
+	it<LocalTestContext>('Connects, disconnects and connects again', async ({ database }) => {
 		const instance = new MongoDatabaseConnector(database.getUri());
 		await expect(instance.connect()).resolves.not.toThrowError();
 		await expect(instance.disconnect()).resolves.not.toThrowError();
 		await expect(instance.connect()).resolves.not.toThrowError();
 	});
 
-	it.skip<LocalTestContext>('Disconnects without connecting', async ({ database }) => {
+	it<LocalTestContext>('Disconnects without connecting', async ({ database }) => {
 		const instance = new MongoDatabaseConnector(database.getUri());
 		await expect(instance.disconnect()).rejects.toThrowError(AlreadyDisconnectedError);
 	});
 });
 
-describe.skip('Invalid URI', () => {
+describe('Invalid URI', () => {
 	it<LocalTestContext>('Creates an instance with invalid URI', ({ database }) => {
 		expect(() => new MongoDatabaseConnector(invalidUri)).toThrowError(InvalidUriError);
 	});

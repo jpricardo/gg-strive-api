@@ -1,19 +1,60 @@
-import DoNotInstantiateError from '../errors/do-not-instantiate-error';
-import InvalidPropertyError from '../errors/invalid-property-error';
-import { BattleType, CharacterProps } from './interfaces/character-props';
+import DoNotInstantiateError from '../errors/do-not-instantiate-error.js';
+import InvalidPropertyError from '../errors/invalid-property-error.js';
 
-class Character {
+export enum BattleType {
+	'Balance' = 'Balance',
+	'Long Range' = 'Long Range',
+	'High Speed' = 'High Speed',
+	'Power Throw' = 'Power Throw',
+	'Unique' = 'Unique',
+	'Technical' = 'Technical',
+	'Shooting' = 'Shooting',
+	'One Shot' = 'One Shot',
+	'Rush' = 'Rush',
+	'Power' = 'Power',
+}
+
+export enum MoveCategory {
+	'Normal' = 'Normal',
+	'Command Normal' = 'Command Normal',
+	'Special' = 'Special',
+	'Super' = 'Super',
+}
+
+interface IPortrait {
+	name: string;
+	img: string;
+}
+
+export interface IFrameData {
+	onHit: string;
+	onCounterHit: string;
+	onBlock: string;
+}
+
+export interface IMove {
+	category: keyof typeof MoveCategory;
+	moveType: string;
+	guard: string;
+	input: string;
+	name: string;
+	frameData: IFrameData;
+}
+
+export interface ICharacterProps {
+	name: string;
+	displayName: string;
+	battleType: BattleType;
+	easyToUse: number;
+	moves: Array<IMove>;
+	portrait?: IPortrait;
+}
+
+export default class Character {
 	private static MaxEasyToUse = 5;
 	private static MinEasyToUse = 1;
 
-	private static initializing = false;
-
-	private props: CharacterProps;
-
-	static create(props: CharacterProps) {
-		Character.initializing = true;
-		return new Character(props);
-	}
+	private props: ICharacterProps;
 
 	get name() {
 		return this.props.name;
@@ -23,15 +64,12 @@ class Character {
 		return this.props.displayName;
 	}
 
-	private constructor(props: CharacterProps) {
-		if (!Character.initializing) throw new DoNotInstantiateError();
-
-		Character.initializing = false;
+	constructor(props: ICharacterProps) {
 		this.validateProps(props);
 		this.props = props;
 	}
 
-	private validateProps(props: CharacterProps) {
+	private validateProps(props: ICharacterProps) {
 		if (props.easyToUse > Character.MaxEasyToUse || props.easyToUse < Character.MinEasyToUse) {
 			throw new InvalidPropertyError('easyToUse');
 		}
@@ -48,4 +86,3 @@ class Character {
 		console.error('Not implemented!');
 	}
 }
-export default Character;

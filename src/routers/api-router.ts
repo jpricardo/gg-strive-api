@@ -4,6 +4,7 @@ import Router, { IRoute, Methods } from './router.js';
 
 import CharacterController from '../controllers/character-controller.js';
 import UserController from '../controllers/user-controller.js';
+import { createCharacterController } from '../use-cases/create-character/index.js';
 
 class CharacterRouter extends Router {
 	routes: IRoute[] = [
@@ -11,8 +12,9 @@ class CharacterRouter extends Router {
 		{ path: '/:name', method: Methods.PATCH, handlers: [UserController.requireAuth, CharacterController.updateByName] },
 		{ path: '/:name', method: Methods.DELETE, handlers: [CharacterController.deleteByName] },
 		{ path: '/', method: Methods.GET, handlers: [CharacterController.getAll] },
-		{ path: '/', method: Methods.POST, handlers: [UserController.requireAuth, CharacterController.create] },
+		{ path: '/', method: Methods.POST, handlers: [UserController.requireAuth, createCharacterController.handle] },
 	];
+
 	constructor() {
 		super();
 	}
