@@ -1,7 +1,7 @@
 import MariaDatabaseConnector from '../../db/maria-database-connector.js';
 import MariaCharactersRepository from '../../repositories/implementations/maria-characters-repository.js';
-import CreateCharacterController from './create-character-controller.js';
-import CreateCharacterUseCase from './create-character-use-case.js';
+import GetCharacterController from './get-character-controller.js';
+import GetCharacterUseCase from './get-character-use-case.js';
 
 const mariaDatabaseConnector = new MariaDatabaseConnector({
 	host: 'localhost',
@@ -12,8 +12,8 @@ const mariaDatabaseConnector = new MariaDatabaseConnector({
 
 const mariaCharactersRepository = new MariaCharactersRepository(mariaDatabaseConnector);
 
-const createCharacterUseCase = new CreateCharacterUseCase(mariaCharactersRepository);
+const getCharacterUseCase = new GetCharacterUseCase(mariaCharactersRepository);
 
-const createCharacterController = new CreateCharacterController(createCharacterUseCase);
+const getCharacterController = new GetCharacterController(getCharacterUseCase);
 
-export { createCharacterController };
+export { getCharacterController };

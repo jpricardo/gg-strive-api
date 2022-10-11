@@ -1,7 +1,7 @@
 import express from 'express';
 import Config from './config.js';
 import Middleware from './lib/middleware.js';
-import Routes from './routers/routes.js';
+import Routes from './routers/implementations/routes.js';
 
 export default class Server {
 	private readonly app = express();

@@ -1,6 +1,6 @@
-import Router, { IRoute, Methods } from './router.js';
+import Router, { IRoute, Methods } from '../router.js';
 
-import UserController from '../controllers/user-controller.js';
+import UserController from '../../controllers/user-controller.js';
 
 export default class AuthRouter extends Router {
 	routes: IRoute[] = [

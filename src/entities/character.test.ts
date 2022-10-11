@@ -1,13 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import DoNotInstantiateError from '../errors/do-not-instantiate-error';
 import InvalidPropertyError from '../errors/invalid-property-error';
-import Character, { BattleType, ICharacterProps, IMove } from './character';
+import Character, { BattleType, ICharacterProps } from './character';
+import Move from './move';
 
 const correctName = 'john';
 const correctDisplayName = 'John Doe';
 const correctBattleType = BattleType.Balance;
 const correctEasyToUse = 5;
-const emptyMoves: Array<IMove> = [];
+const emptyMoves: Array<Move> = [];
 
 const invalidEasyToUse = 10;
 const invalidBattleType = 'Broken';
@@ -37,18 +38,6 @@ describe('Valid props', () => {
 
 		expect(instance.toJson()).toEqual(props);
 	});
-
-	it('Saves', () => {
-		const props = { ...validProps };
-
-		const instance = new Character(props);
-
-		expect(() => instance.save()).not.toThrowError();
-	});
-
-	it.todo('Updates');
-
-	it.todo('Deletes');
 });
 
 describe('Invalid props', () => {

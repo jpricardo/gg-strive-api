@@ -25,6 +25,16 @@ type MoveList = Array<IMove>;
 
 type BattleType = 'Balance' | 'One Shot' | 'Long Range' | 'Shooting' | 'Power' | 'Rush' | 'High Speed' | 'Technical' | 'Power Throw' | 'Unique';
 
+declare interface IGetCharactersResponse {
+	success: boolean;
+	data: ICharacter[];
+}
+
+declare interface ICharacterResponse {
+	success: boolean;
+	data: ICharacter;
+}
+
 declare interface ICharacter {
 	_id: string;
 	name: string;

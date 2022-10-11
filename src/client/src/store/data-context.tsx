@@ -30,8 +30,9 @@ const DataContextProvider: React.FC<Props> = ({ children }) => {
 		getCharacters &&
 			getCharacters()
 				.then(({ data }) => {
+					const characters: ICharacter[] = data.data;
 					setIsLoading(false);
-					setCharacters(data.sort((a, b) => a.name.localeCompare(b.name)));
+					setCharacters(characters.sort((a, b) => a.name.localeCompare(b.name)));
 				})
 				.catch(console.error);
 	};

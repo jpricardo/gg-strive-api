@@ -3,6 +3,14 @@ import AlreadyDisconnectedError from '../errors/already-disconnected-error.js';
 import DoNotInstantiateError from '../errors/do-not-instantiate-error.js';
 import InvalidUriError from '../errors/invalid-uri-error.js';
 
+export interface IDatabaseConnection {
+	query: (queryString: string) => Promise<any>;
+}
+export interface IDatabaseConnector {
+	getConnection: () => Promise<IDatabaseConnection>;
+	query: (queryString: string, variables?: Array<string | number>) => Promise<any>;
+}
+
 export default abstract class DatabaseConnector {
 	private connected = false;
 

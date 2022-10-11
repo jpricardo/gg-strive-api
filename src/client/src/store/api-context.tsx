@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from './auth-context';
 
 interface IDefaultContext {
-	getCharacters: () => Promise<AxiosResponse<ICharacter[], any>>;
+	getCharacters: () => Promise<AxiosResponse<IGetCharactersResponse, any>>;
 	createCharacter: (payload: Partial<ICharacter>) => Promise<AxiosResponse<any, any>>;
 	updateCharacterByName: (name: string, payload: Partial<ICharacter>) => Promise<AxiosResponse<any, any>>;
 	deleteCharacterByName: (name: string) => Promise<AxiosResponse<any, any>>;
@@ -14,7 +14,7 @@ type Props = { children: React.ReactNode };
 const ApiContextProvider: React.FC<Props> = ({ children }) => {
 	const { token } = useContext(AuthContext);
 
-	const getCharacters = () => axios.get<ICharacter[]>('/api/v1/characters');
+	const getCharacters = () => axios.get<IGetCharactersResponse>('/api/v1/characters');
 	const createCharacter = (payload: Partial<ICharacter>) => axios.post('/api/v1/characters', payload, { headers: { Authorization: token } });
 	const updateCharacterByName = (name: string, payload: Partial<ICharacter>) =>
 		axios.patch(`/api/v1/characters/${name}`, payload, { headers: { Authorization: token } });

@@ -7,10 +7,7 @@ export default class CreateCharacterUseCase {
 
 	async execute(data: ICreateCharacterDTO) {
 		const characterAlreadyExists = await this.charactersRepository.getByName(data.name);
-
-		if (characterAlreadyExists) {
-			throw new Error('Already exists!');
-		}
+		if (!!characterAlreadyExists) throw new Error('Already exists!');
 
 		const character = new Character(data);
 

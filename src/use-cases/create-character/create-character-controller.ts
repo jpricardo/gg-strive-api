@@ -1,18 +1,20 @@
 import CreateCharacterUseCase from './create-character-use-case';
 import { Request, Response } from 'express';
-import { IMove } from '../../entities/character';
+import Move from '../../entities/move';
 
 export default class CreateCharacterController {
 	constructor(private createCharacterUseCase: CreateCharacterUseCase) {}
+
 	async handle(request: Request, response: Response) {
-		console.log('Rodando no novo controller!');
 		const { name, displayName, easyToUse, battleType } = request.body;
-		const moves: IMove[] = [];
+		const moves: Move[] = [];
 
 		try {
 			await this.createCharacterUseCase.execute({ name, displayName, easyToUse, battleType, moves });
+			response.status(200).json({ success: true });
 		} catch (err: any) {
-			return response.status(400).json({ message: err.message || 'Unexpected error!' });
+			console.error(err.message);
+			return response.status(400).json({ success: false, message: err.message || 'Unexpected error!' });
 		}
 	}
 }
