@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import DoNotInstantiateError from '../errors/do-not-instantiate-error';
-import InvalidPropertyError from '../errors/invalid-property-error';
+import InvalidPropertyError from '../../errors/invalid-property-error';
 import Character, { BattleType, ICharacterProps } from './character';
 import Move from './move';
 
@@ -13,7 +12,7 @@ const emptyMoves: Array<Move> = [];
 const invalidEasyToUse = 10;
 const invalidBattleType = 'Broken';
 
-const validProps = {
+const validProps: ICharacterProps = {
 	name: correctName,
 	displayName: correctDisplayName,
 	battleType: correctBattleType,

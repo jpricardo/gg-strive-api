@@ -1,5 +1,5 @@
 import { IDatabaseConnector } from '../../db/database-connector.js';
-import Character, { BattleType, ICharacterProps } from '../../entities/character.js';
+import Character, { BattleType, ICharacterProps } from '../../entities/implementations/character.js';
 import { ICharactersRepository } from '../characters-repository.js';
 
 export interface ICharacterDatabaseProps {

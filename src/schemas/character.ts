@@ -1,4 +1,4 @@
-import MongoDatabaseConnector from '../db/mongo-database-connector.js';
+import MongoDatabaseConnector from '../db/implementations/mongo-database-connector.js';
 import Config from '../config.js';
 
 export const connector = new MongoDatabaseConnector(Config.dbUri);

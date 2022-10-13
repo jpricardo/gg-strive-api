@@ -1,4 +1,4 @@
-import Character, { ICharacterProps } from '../entities/character';
+import Character, { ICharacterProps } from '../entities/implementations/character';
 
 export interface ICharactersRepository {
 	save: (character: Character) => Promise<void>;

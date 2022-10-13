@@ -1,5 +1,7 @@
-import InvalidPropertyError from '../errors/invalid-property-error.js';
+import InvalidPropertyError from '../../errors/invalid-property-error.js';
+import IDatabaseModel, { IDatabaseModelProps } from '../database-model.js';
 import Move from './move.js';
+import Portrait from './portrait.js';
 
 export enum BattleType {
 	'Balance',
@@ -14,21 +16,16 @@ export enum BattleType {
 	'Power',
 }
 
-interface IPortrait {
-	name: string;
-	img: string;
-}
-
-export interface ICharacterProps {
+export interface ICharacterProps extends IDatabaseModelProps {
 	name: string;
 	displayName: string;
 	battleType: BattleType;
 	easyToUse: number;
 	moves: Array<Move>;
-	portrait?: IPortrait;
+	portrait?: Portrait;
 }
 
-export default class Character {
+export default class Character implements IDatabaseModel {
 	private static MaxEasyToUse = 5;
 	private static MinEasyToUse = 1;
 

@@ -1,4 +1,4 @@
-import MariaDatabaseConnector from '../../db/maria-database-connector.js';
+import MariaDatabaseConnector from '../../db/implementations/maria-database-connector.js';
 import MariaCharactersRepository from '../../repositories/implementations/maria-characters-repository.js';
 import GetCharacterController from './get-character-controller.js';
 import GetCharacterUseCase from './get-character-use-case.js';

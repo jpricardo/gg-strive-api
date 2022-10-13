@@ -1,5 +1,5 @@
 import mariadb from 'mariadb';
-import { IDatabaseConnector } from './database-connector';
+import { IDatabaseConnector } from '../database-connector';
 
 export interface IDatabaseOptions {
 	user: string;

@@ -1,6 +1,6 @@
 import CreateCharacterUseCase from './create-character-use-case';
 import { Request, Response } from 'express';
-import Move from '../../entities/move';
+import Move from '../../entities/implementations/move';
 
 export default class CreateCharacterController {
 	constructor(private createCharacterUseCase: CreateCharacterUseCase) {}

@@ -1,4 +1,4 @@
-import Character from '../../entities/character.js';
+import Character from '../../entities/implementations/character.js';
 import { ICharactersRepository } from '../../repositories/characters-repository.js';
 
 export default class GetAllCharactersUseCase {

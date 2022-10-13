@@ -1,6 +1,6 @@
 import DatabaseConnector from './database-connector.js';
 import MissingCredentialsError from '../errors/missing-credentials-error.js';
-import MongoDatabaseConnector from './mongo-database-connector.js';
+import MongoDatabaseConnector from './implementations/mongo-database-connector.js';
 
 import dotenv from 'dotenv';
 dotenv.config();

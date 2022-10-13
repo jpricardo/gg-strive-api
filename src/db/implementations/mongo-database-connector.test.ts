@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, test } from 'vitest';
-import AlreadyConnectedError from '../errors/already-connected-error';
-import AlreadyDisconnectedError from '../errors/already-disconnected-error';
-import InvalidUriError from '../errors/invalid-uri-error';
-import InMemoryRepository from '../repositories/in-memory';
-import TestRepository from '../repositories/test-repository';
+import AlreadyConnectedError from '../../errors/already-connected-error';
+import AlreadyDisconnectedError from '../../errors/already-disconnected-error';
+import InvalidUriError from '../../errors/invalid-uri-error';
+import InMemoryRepository from '../../repositories/in-memory';
+import TestRepository from '../../repositories/test-repository';
 import MongoDatabaseConnector from './mongo-database-connector';
 
 // Invalid

@@ -1,4 +1,4 @@
-import Character, { ICharacterProps } from '../../entities/character';
+import Character, { ICharacterProps } from '../../entities/implementations/character';
 import { ICharactersRepository } from '../characters-repository';
 
 export default class TestCharactersRepository implements ICharactersRepository {

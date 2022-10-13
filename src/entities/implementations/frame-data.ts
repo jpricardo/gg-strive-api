@@ -1,14 +1,14 @@
 import { randomUUID } from 'crypto';
+import IDatabaseModel, { IDatabaseModelProps } from '../database-model';
 
-export interface IFrameDataProps {
-	id?: string;
+export interface IFrameDataProps extends IDatabaseModelProps {
 	move: string;
 	onHit: number;
 	onCounterHit: number;
 	onBlock: number;
 }
 
-export default class FrameData {
+export default class FrameData implements IDatabaseModel {
 	get onHit() {
 		return this.props.onHit;
 	}
@@ -20,6 +20,10 @@ export default class FrameData {
 	}
 
 	constructor(private props: IFrameDataProps) {
+		this.validateProps();
+	}
+
+	private validateProps() {
 		if (!this.props.id) this.props.id = randomUUID();
 	}
 

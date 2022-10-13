@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import DatabaseConnector from './database-connector.js';
+import DatabaseConnector from '../database-connector.js';
 
 export default class MongoDatabaseConnector extends DatabaseConnector {
 	validUriStringStartsWith = ['mongodb://', 'mongodb+srv://'];
