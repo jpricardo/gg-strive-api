@@ -20,8 +20,8 @@ const validProps: ICharacterProps = {
 	moves: emptyMoves,
 };
 
-describe('Valid props', () => {
-	it('Creates instance with new keyword', () => {
+describe('Create instance with valid props', () => {
+	it('should create new instance with new keyword', () => {
 		const props = { ...validProps };
 
 		const instance = new Character(props);
@@ -30,7 +30,7 @@ describe('Valid props', () => {
 		expect(instance.name).toEqual(correctName);
 	});
 
-	it('Gets JSON', () => {
+	it('should return json', () => {
 		const props = { ...validProps };
 
 		const instance = new Character(props);
@@ -39,19 +39,19 @@ describe('Valid props', () => {
 	});
 });
 
-describe('Invalid props', () => {
-	it('Creates Character with invalid easyToUse', () => {
+describe('Create instance with invalid props', () => {
+	it('should throw with invalid easyToUse', () => {
 		const props = { ...validProps, easyToUse: invalidEasyToUse };
 
 		expect(() => new Character(props)).toThrowError(InvalidPropertyError);
 	});
 
-	it('Creates Character with invalid battleType', () => {
+	it('should throw with invalid battleType', () => {
 		const props = { ...validProps, battleType: invalidBattleType };
 
 		// @ts-ignore
 		expect(() => new Character(props)).toThrowError(InvalidPropertyError);
 	});
 
-	it.todo('Creates Character with invalid moves');
+	it.todo('should throw with invalid moves');
 });
